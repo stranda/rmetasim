@@ -116,17 +116,6 @@ extern "C" SEXP l2w(SEXP Rland, SEXP numind);
 extern "C" SEXP relateinternal(SEXP ind, SEXP acnp);
  
 
-///output functions
-///convert landscapes to various formats
-///All take a filename, a landscape, and a number of indiviudals to sample per habitat
-extern "C" SEXP writeGDA(SEXP fn, SEXP Rland, SEXP ni);
-extern "C" SEXP writeArlequinDip(SEXP fn, SEXP Rland, SEXP ni);
-extern "C" SEXP writeArlequinHap(SEXP fn, SEXP Rland, SEXP ni);
-extern "C" SEXP writeBIOSYS(SEXP fn, SEXP Rland, SEXP ni);
-extern "C" SEXP writeGenPop(SEXP fn, SEXP Rland, SEXP ni);
-extern "C" SEXP writeR(SEXP fn, SEXP Rland, SEXP ni);
-extern "C" SEXP writeMigrateDip(SEXP fn, SEXP Rland, SEXP ni);
-extern "C" SEXP writeReRat(SEXP fn, SEXP Rland, SEXP ni);
 
 extern "C" SEXP test(SEXP mat1, SEXP mat2);
 

@@ -6,7 +6,7 @@
   Create a set of floating point parameters for a Rmetasim landscape.}
 \usage{
   ## must be called AFTER landscape.new.empty()
-  rland <- landscape.new.floatparam(rland,s=0)}
+   landscape.new.floatparam(rland,s=0)}
 \arguments{
   \item{rland}{skeletion of landscape object, required}
   \item{s}{selfing (default=0), the selfing rate of the species}

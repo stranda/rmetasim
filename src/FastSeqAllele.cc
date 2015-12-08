@@ -25,7 +25,7 @@ SeqAlleleTbl::~SeqAlleleTbl()
 {
   clear();
   setMutationRate(0);
-#ifdef RDEBUG
+#ifdef DEBUG
   cerr << "executing SeqAlleleTbl destructor"<<endl;
 #endif
   UNUSED.resize(0);
@@ -207,7 +207,9 @@ int SeqAlleleTbl::addAlleleAndIndex(SeqAllele  na, int ai)
 	{
 	  if (ai==(*tmpiter).first)
 	    {
+#ifdef DEBUG
 	      cerr << "Allele index: "<<ai<< " already present in table " <<endl;
+#endif
 	      assert(0==1);
 	    }
 	}
@@ -270,9 +272,12 @@ void SeqAlleleTbl::KillAlleleCopy(int i, int /*t*/)
     }
   else
     {
+#ifdef DEBUG
       cerr << "allele index : "<<i<<" not found in Allele.h::KillAlleleCopy"<<endl;
       cerr << "This is the allele table: " <<endl;
       Write(cerr);
+#endif
+
       assert(tmpiter!=A.end());
     }
 }
@@ -289,23 +294,20 @@ void SeqAlleleTbl::clear()
 
 int SeqAlleleTbl::mutator(int anum, int t)
 {
-    cerr<<"in Seq mutator "<<endl;
   map<int, SeqAllele, less<int> >::iterator tmpiter;
   int newanum;
   assert(anum>=0);
 
   if (RandLibObj.uniform()<rate)    //a mutation has occurred
     {
-      cerr<<"in Seq mutator mutation happened SCORE"<<endl;
       SeqAllele na;
       na = getAllele(anum);
-            cerr<<"in Seq mutator mutation happened SCORE2"<<endl;
+      
       na.mutate();  //sets state to a previously unused value.
       na.SetBirth(t);
       na.SetFreq(1);
-            cerr<<"in Seq mutator mutation happened SCORE3"<<endl;
+
       newanum = addAllele(na,t);
-            cerr<<"in Seq mutator mutation happened SCORE4"<<endl;
       return newanum;
     }
   else
@@ -318,7 +320,9 @@ int SeqAlleleTbl::mutator(int anum, int t)
 	}
       else
 	{
+#ifdef DEBUG
 	  cerr <<"Allele number "<<anum<<" not found in allele table: " <<endl<<*this<<endl;
+#endif
 	  assert(tmpiter!=A.end());
 	  return -1;
 	}
@@ -372,13 +376,11 @@ void SeqAlleleTbl::Write(ostream &stream)
 
 vector<int>  SeqAlleleTbl::getAindices()
 {
-  int sz;
+
 
   vector<int> aindices;
   map<int, SeqAllele, less<int> >::iterator tmpiter;
-
-  sz=A.size();
-
+  //sz=A.size();
   for (tmpiter=A.begin();tmpiter!=A.end();tmpiter++)
     {
 	  aindices.push_back((*tmpiter).first);
@@ -387,13 +389,11 @@ vector<int>  SeqAlleleTbl::getAindices()
 }		 
 
 
-
-
 void SeqAlleleTbl::Scan(istream &stream)
 {
   int i;
   int ai;
-  int tmp;
+  //  int tmp;
   int numa;
 
   double tprop;
@@ -406,7 +406,7 @@ void SeqAlleleTbl::Scan(istream &stream)
 
   SeqAllele newa(seqlen);
 
-  tmp = newa.SeqLen();
+  newa.SeqLen();
 
   stream >> rate;
   stream >> ploidy;
@@ -415,12 +415,12 @@ void SeqAlleleTbl::Scan(istream &stream)
     {
       stream >> ai;
       newa.Scan(stream);
-      tmp=addAlleleAndIndex(newa,ai);
+      addAlleleAndIndex(newa,ai);
       tprop = newa.GetProp() + tprop;
     }
   if (tprop != 1.0) //primitive error checking
     {
-#ifdef RDEBUG
+#ifdef DEBUG
       //      cerr << "Proportions of alleles at locus do not total to 1! Instead, they total to: " << tprop << endl;
 #endif
     }

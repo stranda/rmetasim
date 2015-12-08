@@ -1,9 +1,9 @@
 #
 # formats a landscape locus to calculate amova
 #
-landscape.amova.locus <- function(l=1,rland)
+landscape.amova.locus <- function(rland,l=1)
 {
-  loc <- landscape.locus(l,rland)
+  loc <- landscape.locus(rland,l)
   if (landscape.ploidy(rland)[l]>1)
     {
       sortloc <- t(apply(loc[,(landscape.democol()+1):(landscape.democol()+2)],1,sort))
@@ -18,7 +18,7 @@ landscape.amova.locus <- function(l=1,rland)
     names(df) <- colnames(table(paste(loc[,landscape.democol()+1]),landscape.populations(rland)))
     rownames(df) <-   rownames(as.matrix(table(paste(loc[,landscape.democol()+1]),landscape.populations(rland))))
   }
-  ade4::amova(samples=df)
+  amova(samples=df)
 }
 
 
@@ -37,7 +37,7 @@ landscape.amova.pairwise <- function (rland)
             n <- 1
             for (l in 1:length(rland$loci))
               {
-                tmpvec[l] <- landscape.amova.locus(l, compland)$statphi
+                tmpvec[l] <- landscape.amova.locus(compland, l)$statphi
                 if (!is.na(tmpvec[l])) 
                   n <- n + 1
               }
@@ -66,7 +66,7 @@ landscape.amova.pairwise.old <- function(rland)
                   n <- 1
                   for (l in 1:length(rland$loci))
                     {
-                      tmpvec[l] <- landscape.amova.locus(l,compland)$statphi
+                      tmpvec[l] <- landscape.amova.locus(compland, l)$statphi
                       if (!is.na(tmpvec[l]))
                         n <- n+1;
                     }
@@ -81,7 +81,7 @@ landscape.amova.pairwise.old <- function(rland)
 
 landscape.amova <- function(rland,np=24,ns=24) #np is the sample size per population.  Only pops with actual > np
   {
-    unlist(sapply(1:length(rland$loci),function(x,l){landscape.amova.locus(x,l)$statphi
+    unlist(sapply(1:length(rland$loci),function(x,l){landscape.amova.locus(l,x)$statphi
                                             },l=landscape.sample(rland,np=np,ns=ns)))
   }
 

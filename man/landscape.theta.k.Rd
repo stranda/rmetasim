@@ -5,7 +5,7 @@
 \description{
   Calculate theta using number of alleles from a landscape.}
 \usage{
- theta.k.mat <- landscape.theta.k(rland)
+ landscape.theta.k(rland)
 }
 \arguments{
   \item{rland}{the Rmetasim landscape object}

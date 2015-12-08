@@ -13,7 +13,7 @@ landscape.exp.het <- function(Rland)
       {
         for (loc in 1:length(Rland$loci))
           {
-            tab <- table(landscape.locus(loc,Rland)[landscape.populations(Rland)==j,c(-1:-(landscape.democol()))])
+            tab <- table(landscape.locus(Rland,loc)[landscape.populations(Rland)==j,c(-1:-(landscape.democol()))])
             sctab <- tab/sum(tab)
             rl[j,loc] <- 1 - sum(sctab^2)
           }
@@ -34,7 +34,7 @@ landscape.obs.het <- function(Rland)
               {
                 rl[j,loc] <- NA
               }  else {
-                freq.df <- data.frame(table(landscape.locus(loc,Rland)[landscape.populations(Rland)==j,c((-1:-landscape.democol()),-8)],landscape.locus(loc,Rland)[landscape.populations(Rland)==j,c((-1:-landscape.democol()),-7)]))
+                freq.df <- data.frame(table(landscape.locus(Rland,loc)[landscape.populations(Rland)==j,c((-1:-landscape.democol()),-8)],landscape.locus(Rland,loc)[landscape.populations(Rland)==j,c((-1:-landscape.democol()),-7)]))
                 rl[j,loc] <- (1-sum(freq.df[as.character(freq.df[,1])==as.character(freq.df[,2]),3])/sum(freq.df[,3]))
               }
           }
@@ -45,7 +45,7 @@ landscape.obs.het <- function(Rland)
 
 landscape.FWright <- function (Rland)
   {
-    1-landscape.obs.het(Rland)/landscape.exp.het(Rland)
+    1-(landscape.obs.het(Rland)/landscape.exp.het(Rland))
   }
 
 
@@ -57,7 +57,7 @@ landscape.allelefreq.old <- function(Rland,tbl.out=FALSE)
         pops <- vector("list",length(Rland$loci))
         for (j in unique(landscape.populations(Rland)))
           {
-            alleles     <- landscape.locus(i,Rland)[landscape.populations(Rland)==j,c(-1:-(landscape.democol()))]
+            alleles     <- landscape.locus(Rland,i)[landscape.populations(Rland)==j,c(-1:-(landscape.democol()))]
             freqtbl     <- table(alleles)
             scframe     <- data.frame(freqtbl/sum(freqtbl))
             scframe$pop <- rep(j,dim(scframe)[1])
@@ -82,7 +82,7 @@ landscape.allelecount <- function(Rland,tbl.out=FALSE)
         pops <- vector("list",length(Rland$loci))
         for (j in unique(landscape.populations(Rland)))
           {
-            alleles     <- landscape.locus(i,Rland)[landscape.populations(Rland)==j,c(-1:-(landscape.democol()))]
+            alleles     <- landscape.locus(Rland,i)[landscape.populations(Rland)==j,c(-1:-(landscape.democol()))]
             freqtbl     <- table(alleles)
             scframe     <- data.frame(freqtbl)
             scframe$pop <- rep(j,dim(scframe)[1])

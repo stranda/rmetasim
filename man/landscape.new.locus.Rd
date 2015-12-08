@@ -5,8 +5,10 @@
 \description{
   Add a locus to a Rmetasim landscape object}
 \usage{
-  ## must be called AFTER integer, switch, and float params have been created
-  rland <- landscape.new.locus(rland,type=0,ploidy=1,mutationrate=0,transmission=1,numalleles=2,allelesize=50,frequencies=0)
+## must be called AFTER integer, switch, and float params have been created
+landscape.new.locus(rland,type=0,ploidy=1,
+             mutationrate=0,transmission=1,numalleles=2,
+             allelesize=50,frequencies=NULL, states = NULL)
 }
 \arguments{
   \item{rland}{partially created landscape object, required}
@@ -16,7 +18,11 @@
   \item{transmission}{(default=1) 1=uniparental inheritance, 0=biparental inheritance}
   \item{numalleles}{(default=2) number of different alleles at the time of creation}
   \item{allelesize}{(default=50) length of DNA strings if type=2}
-  \item{frequencies}{(default=NULL) vector of frequencies for each allele, must be numalleles long and add up to 1, if NULL frequencies are equally distributed}
+  \item{frequencies}{(default=NULL) vector of frequencies for each
+  allele, must be numalleles long and add up to 1, if NULL frequencies
+  are equally distributed}
+\item{states}{States for each of the alleles specified.  If NULL
+  sequential numeric states used.}
 }
 
 \examples{
@@ -25,7 +31,8 @@
   exampleland <- landscape.new.floatparam(exampleland)
   exampleland <- landscape.new.switchparam(exampleland)
 
-  exampleland <- landscape.new.locus(exampleland,type=2,ploidy=2,mutationrate=.001,numalleles=5,allelesize=100)
+  exampleland <- landscape.new.locus(exampleland,type=2,ploidy=2,
+                          mutationrate=.001,numalleles=5,allelesize=100)
 
   exampleland$loci
 

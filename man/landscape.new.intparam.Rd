@@ -6,7 +6,7 @@
   Create a set of integer parameters for a Rmetasim landscape.}
 \usage{
   ## must be called AFTER landscape.new.empty()
-  rland <- landscape.new.intparam(rland,h=2,s=1,cg=0,ce=0,totgen=500,maxland=10000)}
+   landscape.new.intparam(rland,h=1,s=1,cg=0,ce=0,totgen=1000,maxland=200000)}
 \arguments{
   \item{rland}{skeletion of landscape object, required}
   \item{h}{habitats (default=1), the number of different subpopulations within the landscape}

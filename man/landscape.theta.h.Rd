@@ -6,7 +6,7 @@
   heterozygosity.}
 
 \usage{
- theta.h.mat <- landscape.theta.h(rland)
+  landscape.theta.h(rland)
 }
 \arguments{
   \item{rland}{the Rmetasim landscape object}

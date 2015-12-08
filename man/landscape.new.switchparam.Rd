@@ -6,7 +6,7 @@
   Create a set of boolean (1 or 0) parameters for a Rmetasim landscape.}
 \usage{
   ## must be called AFTER landscape.new.empty()
-  rland <- landscape.new.switchparam(rland,re=1,rd=1,mp=1,dd=0)}
+   landscape.new.switchparam(rland,re=0,rd=0,mp=1,dd=0)}
 \arguments{
   \item{rland}{skeletion of landscape object, required}
   \item{re}{randepoch (default=0), 1=randomly pick a new epoch (from the

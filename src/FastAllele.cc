@@ -20,7 +20,7 @@ AlleleTbl::AlleleTbl()
 
 AlleleTbl::~AlleleTbl()
 {
-#ifdef RDEBUG
+#ifdef DEBUG
   cerr << "executing AlleleTbl destructor"<<endl;
 #endif
 }
@@ -29,8 +29,10 @@ AlleleTbl::~AlleleTbl()
 ///t is the current clock-tick
 int AlleleTbl::mutator(int /*anum*/, int /*t*/)
 {
+#ifdef DEBUG
   cerr << "AlleleTbl mutator called.  This function should be overridden"<<endl;
   assert(1==0);
+#endif
   return -1;
 }
 
@@ -59,7 +61,7 @@ InfAlleleTbl::~InfAlleleTbl()
   setMutationRate(0);
   UNUSED.resize(0);
 
-#ifdef RDEBUG
+#ifdef DEBUG
   cerr << "executing InfAlleleTbl destructor"<<endl;
 #endif
 
@@ -247,8 +249,10 @@ int InfAlleleTbl::addAlleleAndIndex(Allele  na, int ai)
 	{
 	  if (ai==(*tmpiter).first)
 	    {
+#ifdef DEBUG
 	      cerr << "Allele index: "<<ai<< " already present in table " <<endl;
 	      assert(0==1);
+#endif
 	    }
 	}
       tmpiter++;
@@ -315,9 +319,11 @@ void InfAlleleTbl::KillAlleleCopy(int i, int /*t*/)
     }
   else
     {
+#ifdef DEBUG
       cerr << "allele index : "<<i<<" not found in Allele.h::KillAlleleCopy"<<endl;
       cerr << "This is the allele table: " <<endl;
       Write(cerr);
+#endif
       assert(tmpiter!=A.end());
     }
 
@@ -381,7 +387,9 @@ int InfAlleleTbl::mutator(int anum, int t)
 	}
       else
 	{
+#ifdef DEBUG
 	  cerr <<"Allele number "<<anum<<" not found in allele table: " <<endl<<*this<<endl;
+#endif
 	  assert(tmpiter!=A.end());
 	  return -1;
 	}
@@ -403,7 +411,7 @@ void InfAlleleTbl::Write(ostream &stream)
   Allele al;
 
   //don't clean table while debugging
-#ifndef RDEBUG
+#ifndef DEBUG
   CalcProps();
   GCAlleles();
 #endif
@@ -426,12 +434,12 @@ void InfAlleleTbl::Write(ostream &stream)
 
 vector<int>  InfAlleleTbl::getAindices()
 {
-  int sz;
+  //  int sz;
 
   vector<int> aindices;
   map<int, Allele, less<int> >::iterator tmpiter;
 
-  sz=A.size();
+  //sz=A.size();
 
   for (tmpiter=A.begin();tmpiter!=A.end();tmpiter++)
     {
@@ -445,7 +453,7 @@ void InfAlleleTbl::Scan(istream &stream)
   Allele newa;
   int i;
   int ai;
-  int tmp;
+  //  int tmp;
   int numa;
 
   double tprop;
@@ -460,7 +468,8 @@ void InfAlleleTbl::Scan(istream &stream)
   for (i=0;i<numa;i++)
     {
       stream >> ai >> newa;
-      tmp=addAlleleAndIndex(newa,ai);
+      addAlleleAndIndex(newa,ai);
+      
       tprop = newa.GetProp() + tprop;
       if (newa.GetState()>maxstate)
 	{
@@ -508,7 +517,7 @@ StepAlleleTbl::~StepAlleleTbl()
   setMutationRate(0);
   UNUSED.resize(0);
 
-#ifdef RDEBUG
+#ifdef DEBUG
   cerr << "executing StepAlleleTbl destructor"<<endl;
 #endif
 
@@ -555,7 +564,9 @@ int StepAlleleTbl::mutator(int anum, int t)
     }
   else
     {
+#ifdef DEBUG
       cerr <<"Allele number "<<anum<<" not found in allele table: " <<endl<<*this<<endl;
+#endif
       assert(tmpiter!=A.end());
       return -1;
     }

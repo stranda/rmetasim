@@ -111,7 +111,9 @@ istream &operator>>(istream & stream, SiteObj &site)
   stream >> tmp;
   if (alist.find(tmp)==string::npos)
     {
+#ifdef DEBUG
       cerr << "Problem with DNA sequence.  A base other than AGTCagtc read (could signify premature sequence end"<<endl;
+#endif
       assert(0==1);
     }
   site.state=tmp;

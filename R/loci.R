@@ -5,7 +5,7 @@
 #individual genotypes
 
 #returns a individual x ploidy matrix of aindices
-landscape.locus <- function(lnum=1,Rland)
+landscape.locus <- function(Rland,lnum=1)
   {
     if(is.landscape(Rland))
       if (lnum<=Rland$intparam$locusnum)
@@ -15,13 +15,13 @@ landscape.locus <- function(lnum=1,Rland)
   }
 
 #returns a individual x ploidy matrix of states
-landscape.states <- function(lnum=1,Rland)
+landscape.states <- function(Rland,lnum=1)
   {
     if(is.landscape(Rland))
       if (lnum<=Rland$intparam$locusnum)
         {
           lmat <- as.data.frame(Rland$individuals[,c(rep(TRUE,landscape.democol()),landscape.locusvec(Rland)==lnum)])
-          st <- landscape.locus.states(lnum,Rland)
+          st <- landscape.locus.states(Rland,lnum)
           lmat[,landscape.democol()+1] <- st$state[sapply(lmat[,landscape.democol()+1],function(x,aindex){which(aindex==x)},aindex=st$aindex)]
           if (landscape.ploidy(Rland)[lnum]==2)
             {
@@ -56,14 +56,14 @@ landscape.locusvec<- function(Rland)
 #
 #takes a locus and returns the states and their indices
 #
-landscape.locus.states<-function(lnum=1,Rland)
+landscape.locus.states<-function(Rland,lnum=1)
   {
     if (is.landscape(Rland))
       if (lnum<=Rland$intparam$locusnum)
         {
           ain<-c();
           sta<-c();
-          locin <- landscape.locus(lnum,Rland)[,c(-1:-landscape.democol())]
+          locin <- landscape.locus(Rland,lnum)[,c(-1:-landscape.democol())]
 #          print(locin)
           ainds <- unique(c(locin))
 #          print(ainds)
@@ -79,21 +79,6 @@ landscape.locus.states<-function(lnum=1,Rland)
         }
   }
 
-#indxfreq <-function(lnum=1,Rland)
-#  {
-#    lv<-landscape.locus(lnum,Rland)[,c(rep(FALSE,landscape.democol()),
-#                                           rep(TRUE,(ncol(locus(lnum,Rland))-landscape.democol())))];
-#    if (landscape.ploidy(Rland)[lnum]==1)
-#      {
-#        table(landscape.populations(Rland),lv)
-#      }
-#    else
-#      {
-#        lv2<-c(lv[,1],lv[,2]);
-#        table(rep(landscape.populations(Rland),2),lv2)
-#      }
-#    
-#  }
 
 
 

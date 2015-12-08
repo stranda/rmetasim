@@ -23,7 +23,8 @@ files.
 
 #include <assert.h>
 
-#include <math.h>
+//#include <math.h>
+#include <cmath>
 #include <time.h>
 
 #include <vector>
@@ -39,6 +40,7 @@ UTILITY MACROS
  */
 
 ///#define RDEBUG
+///#define DEBUG
 
 
 #define HAVE_LAPACK

@@ -37,15 +37,15 @@ The indivdual class is essentially abstract.  It mainly contains a
 demographic class variable to pass to its descendents
 
  */
-
+/***
 namespace rmetasim_gpu {
-    struct Landscape_gpu;
+    class Landscape_gpu;
 }
-
+****/
 class PackedIndividual {
 
 private:
-    friend class rmetasim_gpu::Landscape_gpu;
+  ///    friend class rmetasim_gpu::Landscape_gpu;
 
   /// time click in which the individual is born
   int gen;

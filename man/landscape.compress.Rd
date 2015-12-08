@@ -3,12 +3,13 @@
 \title{Function to resolve inconsistencies within a landscape, deprecated}
 
 \description{
-  Deprecated, 'clean.landscape()' does the same.}
-  \usage{
-  rland <- landscape.compress(rland)
+  Deprecated, 'clean.landscape()' does the same.
+}
+\usage{
+   landscape.compress(Rland)
 }
 \arguments{
-  \item{rland}{the Rmetasim landscape object}
+  \item{Rland}{the Rmetasim landscape object}
 }
 
 \examples{

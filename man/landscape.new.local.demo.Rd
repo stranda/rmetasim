@@ -6,8 +6,10 @@
   Create a local demography for an Rmetasim Landscape object}
 \usage{
   ## must be called AFTER integer, switch, and float params have been created
-  ## S, R, and M matricies must be square matricies of size rland$intparam$stages by rland$intparam$stages
-  rland <- landscape.new.local.demo(rland,S=Smatrix,R=Rmatrix,M=Mmatrix,k=0)}
+  ## S, R, and M matricies must be square matricies of size
+  ##  rland$intparam$stages by rland$intparam$stages
+
+   landscape.new.local.demo(rland,S,R,M,k=0)}
 \arguments{
   \item{rland}{partially created landscape object, required}
   \item{S}{Survivablity matrix for demograpy, required}

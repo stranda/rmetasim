@@ -48,7 +48,7 @@ coal2rmet <- function( file, norm=TRUE){
 
 }
 
-parse.arlequin <- function( file)
+parse.arlequin <- function(file)
 {
   dat <- readLines( file)
   data <- NULL
@@ -67,7 +67,7 @@ parse.arlequin <- function( file)
 
     fo <- textConnection( dati)
     on.exit( close( fo))
-    data.i <- cbind( pop=i.pop, read.table( fo, header=FALSE, row=NULL)[ ,-(1:2),drop=FALSE])
+    data.i <- cbind( pop=i.pop, read.table( fo, header=FALSE, row.names=NULL)[ ,-(1:2),drop=FALSE])
     close( fo)
     on.exit()
 
@@ -91,7 +91,7 @@ parse.arlequin <- function( file)
 
 #
 #
-# Allan's function to glue the parsed data into rmetasim format
+# Allan's function to glue the parse2d data into rmetasim format
 # This function will clobber existing individuals and loci in rland object
 #
 #

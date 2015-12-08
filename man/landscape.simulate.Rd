@@ -5,10 +5,10 @@
 \description{
   Simulate a Rmetasim landscape for a number of generations.}
 \usage{
-  rland <- landscape.simulate(rland=l,numit=100,seed=-1,compress=FALSE,adj.lambda=0)
+   landscape.simulate(Rland,numit,seed=-1,compress=FALSE,adj.lambda=0)
 }
 \arguments{
-  \item{rland}{the Rmetasim landscape object}
+  \item{Rland}{the Rmetasim landscape object}
   \item{numit}{the number of generations/iterations to simulate, note that
     landscapes will not run past the rland$intparam$totalgens value}
   \item{seed}{The default value of seed uses the seed set in the

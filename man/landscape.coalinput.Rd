@@ -7,7 +7,7 @@
 
 \usage{
   ## must be called AFTER integer, switch, and float params have been created
-  rland <- landscape.coalinput(rland, npp=500, arlseq = "seq.arp", arlms = "ms.arp", seqsitemut=1e-7,
+   landscape.coalinput(rland, npp=200, arlseq = NULL, arlms = NULL, seqsitemut=1e-7,
                                msmut = 5e-4, mut.rates = NULL)
 }
 \arguments{

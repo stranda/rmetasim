@@ -7,7 +7,9 @@ This function updates the deomgraphic parameters in a landscape for a
 particular epoch
   }
 \usage{
-  rland <- landscape.modify.epoch(rland,epoch=1,S=NULL,R=NULL,M=NULL,epochprob=NULL,startgen=NULL,extinct=NULL,carry=NULL,localprob=NULL)
+landscape.modify.epoch(rland,epoch=1,S=NULL,R=NULL,M=NULL,
+   epochprob=NULL,startgen=NULL,extinct=NULL,
+   carry=NULL,localprob=NULL)
 }
 \arguments{
   \item{rland}{landscape object, required}

@@ -28,7 +28,7 @@ void AlleleLookTbl::push_back(AlleleTbl * atp)
 void AlleleLookTbl::clear()
 {
   int asz,i;
-#ifdef RDEBUG
+#ifdef DEBUG
   cerr << "deleting Atbl[i]" <<endl;
   cerr << "ntbls"<<Atbl.size()<<endl;
 #endif
@@ -37,7 +37,7 @@ void AlleleLookTbl::clear()
     {
       for (i=0;i<asz;i++)
 	{
-#ifdef RDEBUG
+#ifdef DEBUG
 	  cerr << "Cleaning  Atbl[i] i= "<<i <<endl;
 #endif
 	  delete Atbl[i];
@@ -97,7 +97,9 @@ istream &operator>>(istream & stream, AlleleLookTbl &a)
 	}
       else
 	{
+#ifdef DEBUG
 	  cerr << "Cannot identify the locus type in input stream"<<endl;
+#endif
 	  assert (0==1);
 	}
       AT->clear();

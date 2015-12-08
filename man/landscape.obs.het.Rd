@@ -5,10 +5,10 @@
 \description{
   Calculate observed heterozygosity from a landscape}
 \usage{
-  hetmat <- landscape.obs.het(rland)
+   landscape.obs.het(Rland)
 }
 \arguments{
-  \item{rland}{the Rmetasim landscape object}
+  \item{Rland}{the Rmetasim landscape object}
 }
 \value{
 A matrix with num loci columns and num populations rows.  Each element

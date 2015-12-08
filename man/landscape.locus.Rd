@@ -5,7 +5,7 @@
 \description{return a matrix containing genotypes for a particular locus
 }
 \usage{
-  landscape.locus(lnum=1,Rland)
+  landscape.locus(Rland, lnum=1)
 }
 \arguments{
   \item{lnum}{the locus to return}
@@ -31,7 +31,7 @@ variables) of an individual.  Here rland is a
   exampleland <- landscape.new.example()
   exampleland <- landscape.simulate(exampleland, 4)
   print("Allele frequencies at locus 1")
-  table(landscape.locus(1,exampleland)[,c(-1:-(landscape.democol()))]) 
+  table(landscape.locus(exampleland,1)[,c(-1:-(landscape.democol()))]) 
   rm(exampleland)
 }
 \keyword{misc}

@@ -33,14 +33,18 @@ public:
 	  }
 	else
 	  {
+#ifdef DEBUG
 	    cerr << "allele index: "<<i<<" not found in SeqAllele.h::getAllele"<<endl;
+#endif
 	    assert(tmpiter!=A.end());
 	    return (*tmpiter).second; //will never reach this statement.  Present to avoid compile complaints
 	  }
       }
     else
       {
+#ifdef DEBUG
 	    cerr << "allele table empty in SeqAllele.h::getAllele"<<endl;
+#endif
 	    assert(A.size()>0);
 
 	    return (*tmpiter).second; //will never reach this statement.  Present to avoid compile complaints
@@ -85,13 +89,17 @@ public:
 	    }
 	  else
 	    {
+#ifdef DEBUG
 	      cerr << "allele index: "<<i<<" not found in Allele.h::getAllele"<<endl;
+#endif
 	      assert(tmpiter!=A.end());
 	    }
 	}
       else
 	{
+#ifdef DEBUG
 	  cerr << "allele table empty in Allele.h::getAllele"<<endl;
+#endif
 	  assert(A.size()>0);
 	}
     }		 

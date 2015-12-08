@@ -12,25 +12,32 @@ populations/habitats, then these should be given in the vector \code{pvec}
 
 }
 \usage{
-landscape.sample(rland, np = NULL, ns = NULL, pvec = NULL)
+landscape.sample(Rland, np = NULL, ns=NULL, pvec=NULL,svec = NULL)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{rland}{ landscape object }
-  \item{np}{ number populations }
+  \item{Rland}{ landscape object }
   \item{ns}{ number samples per population }
-  \item{pvec}{ vector of population id numbers to sample }
+  \item{np}{number of populations to sample}
+  \item{pvec}{a vector of populations to sample}
+  \item{svec}{A vector of the stages sampled from a landscape. This
+    provides good control over which populations and which stages within
+  populations can be sampled.}
 }
 \value{
 landscape object
+}
+\details{
+This function is intended to provide a lot of flexibility in sampling
+individuals from a rmetasim landscape
 }
 
 \examples{
 	l <- landscape.new.example()
 	l <- landscape.simulate(l,1)
-	l.samp <- landscape.sample(l,np=3,ns=24)
+	l.samp <- landscape.sample(l,np=1,ns=24)
 	landscape.amova.pairwise(l.samp)
-        l.samp2 <- landscape.sample(l,ns=24,pvec=c(1,3))
+        l.samp2 <- landscape.sample(l,ns=24,pvec=c(2))
 	landscape.amova.pairwise(l.samp2) 
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the

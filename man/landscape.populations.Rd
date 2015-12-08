@@ -26,7 +26,8 @@
 \examples{
   exampleland <- landscape.new.example()
   exampleland <- landscape.simulate(exampleland, 4)
-  plot(table(landscape.populations(exampleland)),main="Distribution of population size in landscape")
+  plot(table(landscape.populations(exampleland)),
+       main="Distribution of population size in landscape")
   rm(exampleland)
 }
 \keyword{misc}

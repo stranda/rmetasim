@@ -6,7 +6,7 @@
 \description{Convenience function to return a matrix containing the states of the alleles and their indicesfor a particular locus
 }
 \usage{
-  landscape.locus.states(lnum=1,Rland)
+  landscape.locus.states(Rland,lnum=1)
 }
 \arguments{
   \item{lnum}{the locus to return}

@@ -8,7 +8,7 @@
   ## must be called AFTER integer, switch, and float params, demography,
   ## epochs, and loci have been created
 
-  rland <- landscape.new.individuals(rland,PopulationSizes)
+   landscape.new.individuals(rland,PopulationSizes)
 }
 \arguments{
   \item{rland}{nearly complete landscape object, required}
@@ -45,7 +45,8 @@
                 rep(0,4)), nrow = 4)
 
   exampleland<- landscape.new.epoch(exampleland,exampleS,exampleR,exampleM)
-  exampleland <- landscape.new.locus(exampleland,type=2,ploidy=2,mutationrate=.001,numalleles=5,allelesize=100)
+  exampleland <- landscape.new.locus(exampleland,type=2,ploidy=2,
+                   mutationrate=.001,numalleles=5,allelesize=100)
   exampleland <- landscape.new.locus(exampleland,type=1,ploidy=1,mutationrate=.001,numalleles=3)
   exampleland <- landscape.new.locus(exampleland,type=0,ploidy=2,mutationrate=.004,numalleles=4)
 

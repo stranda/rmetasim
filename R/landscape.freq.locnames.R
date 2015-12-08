@@ -1,0 +1,18 @@
+#' @title Landscape locus names
+#' @description Landscape locus names
+#'
+#' @param l a \code{rmetasim} landscape object.
+#'
+#'
+landscape.freq.locnames <- function(l)
+  {
+    num.loc <- length(landscape.ploidy(l))
+    namevec <- NULL
+    for (loc in 1:num.loc)
+      {
+        genos <- landscape.locus(l,loc)[,-1:-landscape.democol()]
+        loc.names <- paste(loc, names(table(unlist(genos))), sep = ".")
+        namevec <- c(namevec,paste("L", loc.names, sep = '')) #not a fast construct, I know.  But remember Knuth "early optimization is the root of all
+      }
+    namevec
+  }

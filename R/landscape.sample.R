@@ -1,81 +1,83 @@
-landscape.sample.stages <- function(rland,ns=NULL,svec=NULL)
+landscape.sample.stages <- function(Rland,ns=NULL,svec=NULL)
     {
         if (is.null(svec))
             {
-                rland
+                Rland
             } else { #there are stages to check out
-                stgs <- 0:((rland$intparam$stages * rland$intparam$habitats)-1)
+                stgs <- 0:((Rland$intparam$stages * Rland$intparam$habitats)-1)
                 if (sum(!(svec%in%stgs))>0) stop ("you have specified demographic stages that do no occur in this landscape")
-                rland$individuals <- rland$individuals[rland$individuals[,1]%in%svec,]
+                Rland$individuals <- Rland$individuals[Rland$individuals[,1]%in%svec,]
                 if (!is.null(ns))
                     {
                         for (s in svec)
                             {
-                                inds <- rland$individuals[rland$individuals[,1]==s,]
-                                rland$individuals <-  rland$individuals[rland$individuals[,1]!=s,]
+                                inds <- Rland$individuals[Rland$individuals[,1]==s,]
+                                Rland$individuals <-  Rland$individuals[Rland$individuals[,1]!=s,]
                                 inddim <- dim(inds)[1]
                                 if (inddim>0)
                                     if (inddim<ns)
-                                        rland$individuals <- rbind(rland$individuals,inds)
+                                        Rland$individuals <- rbind(Rland$individuals,inds)
                                     else
-                                        rland$individuals <- rbind(rland$individuals,inds[sample(1:inddim,ns,replace=F),])
+                                        Rland$individuals <- rbind(Rland$individuals,inds[sample(1:inddim,ns,replace=F),])
                             }
-                        rland$individuals <- rland$individuals[order(rland$individuals[,1],rland$individuals[,4]),]
+                        Rland$individuals <- Rland$individuals[order(Rland$individuals[,1],Rland$individuals[,4]),]
                     }
-                rland
+                Rland
             }
     }
 
-landscape.sample.pops <- function(rland,ns=NULL,pvec=NULL)
+landscape.sample.pops <- function(Rland,ns=NULL,pvec=NULL)
     {
         if (is.null(pvec))
             {
-                rland
+                Rland
             } else { #there are pops
-                pops <- 1:rland$intparam$habitats
+                pops <- 1:Rland$intparam$habitats
                 if (sum(!(pvec%in%pops))>0) stop ("you have specified populations that can not occur in this landscape")
-                rland$individuals <- rland$individuals[landscape.populations(rland)%in%pvec,]
+                Rland$individuals <- Rland$individuals[landscape.populations(Rland)%in%pvec,]
                 if (!is.null(ns))
                     {
                         for (p in pvec)
                             {
-                                inds <- rland$individuals[landscape.populations(rland)==p,]
-                                rland$individuals <-  rland$individuals[landscape.populations(rland)!=p,]
+                                inds <- Rland$individuals[landscape.populations(Rland)==p,]
+                                Rland$individuals <-  Rland$individuals[landscape.populations(Rland)!=p,]
                                 inddim <- dim(inds)[1]
                                 if (inddim<ns)
-                                    rland$individuals <- rbind(rland$individuals,inds)
+                                    Rland$individuals <- rbind(Rland$individuals,inds)
                                 else
-                                    rland$individuals <- rbind(rland$individuals,inds[sample(1:inddim,ns,replace=F),])
+                                    Rland$individuals <- rbind(Rland$individuals,inds[sample(1:inddim,ns,replace=F),])
                             }
-                        rland$individuals <- rland$individuals[order(rland$individuals[,1],rland$individuals[,4]),]
+                        Rland$individuals <- Rland$individuals[order(Rland$individuals[,1],Rland$individuals[,4]),]
                     }
-                rland
+                Rland
             }
     }
 
 
 
-landscape.sample <- function (rland, np = NULL, ns = NULL, pvec = NULL, svec=NULL) 
+landscape.sample <- function (Rland, np = NULL, ns = NULL, pvec = NULL, svec=NULL) 
 {
-
     if ((!is.null(svec))&(!is.null(pvec))) stop ("either pvec or svec should be specified, not both")
     if ((!is.null(np))|(!is.null(pvec)))
         {
             if (is.null(pvec))
                 {
-                    pvec <- sample(1:rland$intparam$habitats,np,F)
-                }
+                    if (Rland$intparam$habitats<np){stop("can't sample more populations than exist in landscape")}
+                    pvec <- sample(1:Rland$intparam$habitats,np,F)
+                } else {
+                        pvec <- unique(pvec)
+                    }
             if ((!is.null(np))&(!is.null(pvec)))
                 if (np!=length(pvec)) stop ("if you specify both np and pvec, the length of pvec has to equal np")
-            retland <- landscape.sample.pops(rland,ns=ns,pvec=pvec)
+            retland <- landscape.sample.pops(Rland,ns=ns,pvec=pvec)
         } else 
             if (!is.null(svec))
                 {
-                    retland <- landscape.sample.stages(rland,ns=ns,svec=svec)
+                    retland <- landscape.sample.stages(Rland,ns=ns,svec=svec)
                 } else
                     if (!is.null(ns))
                         {
-                            retland <- landscape.sample.pops(rland,ns=ns,pvec=1:rland$intparam$habitats)
-                        } else retland <- rland
+                            retland <- landscape.sample.pops(Rland,ns=ns,pvec=1:Rland$intparam$habitats)
+                        } else retland <- Rland
     retland
 }

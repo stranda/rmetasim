@@ -18,9 +18,8 @@ landscape.mig.matrix <- function(h=3,               #habitats
       stop("First reproductive stage must be smaller than total number of stages")
     if(mig.model=="island")
       {
-        require(gtools)
         R.int <- matrix(0,nrow=h,ncol=h)
-        R.comb <- combinations(h,s,1:h)[h:1,]
+        R.comb <- combinations(h,s,1:h)[h:1,] #from gtools.  Could try a hand-written one to reduce depend
         for(a in 1:h)
           {
             R.int[R.comb[a,],a] <- 1          

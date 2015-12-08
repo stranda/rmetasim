@@ -39,8 +39,8 @@ TransMat::TransMat (size_t s )
 
 TransMat::~TransMat ()
 {
-#ifdef RDEBUG
-   cout << "destructing TransMat" << "\n";
+#ifdef DEBUG
+   cerr << "destructing TransMat" << "\n";
 #endif
    size_t i;
    for (i=0;i<tm.size();i++)
@@ -48,8 +48,8 @@ TransMat::~TransMat ()
        tm[i].resize(0);
      }
    tm.resize(0);
-#ifdef RDEBUG
-   cout << "finished destructing TransMat" << "\n";
+#ifdef DEBUG
+   cerr << "finished destructing TransMat" << "\n";
 #endif
 }
 
@@ -61,13 +61,13 @@ void TransMat::SetSize(size_t sz)
 
   size = sz; 
 
-#ifdef RDEBUG
+#ifdef DEBUG
   cerr << "Resizing a first dimension of a transmatrix of size"<<sz <<endl;
 #endif
 
   tm.resize(sz);
 
-#ifdef RDEBUG
+#ifdef DEBUG
   cerr << "Finished resizing the first dimension" <<endl;
 #endif
   for (i=0;i<sz;i++)

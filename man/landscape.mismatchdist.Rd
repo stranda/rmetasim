@@ -6,11 +6,11 @@
   the number of seqregating sites.}
 
 \usage{
- misdist <- landscape.mismatchdist(lnum=1,rland)
+  landscape.mismatchdist(Rland,lnum=1)
 }
 \arguments{
   \item{lnum}{locus number to calculate mismatch upon}
-  \item{rland}{the Rmetasim landscape object}
+  \item{Rland}{the Rmetasim landscape object}
 }
 \details{Calculates a mismatch distribution for DNA-sequence-based loci.}
   
@@ -20,7 +20,7 @@ reflects the estimated theta for that population x locus combination  }
 \examples{
   exampleland <- landscape.new.example()
   exampleland <- landscape.simulate(exampleland, 4)
-  misdist <- landscape.mismatchdist(3,exampleland) #will produce       
+  misdist <- landscape.mismatchdist(exampleland,3) #will produce       
   misdist                                          #ridiculous output
 }
 \keyword{misc}

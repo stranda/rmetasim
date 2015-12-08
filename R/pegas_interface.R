@@ -11,7 +11,7 @@ landscape.theta.h <- function(rland)
         rland.tmp$individuals <- rland.tmp$individuals[landscape.populations(rland.tmp)==i,]
         for (j in 1:length(rland$loci))
           {
-            alleledist <- as.factor(landscape.locus(lnum=j,rland.tmp)[,c(-1:-(landscape.democol()))])
+            alleledist <- as.factor(landscape.locus(rland.tmp,lnum=j)[,c(-1:-(landscape.democol()))])
             if (length(unique(alleledist))>1)
               retval[i,j] <- pegas::theta.h(alleledist)
             else
@@ -31,7 +31,7 @@ landscape.theta.k <- function(rland)
         rland.tmp$individuals <- rland.tmp$individuals[landscape.populations(rland.tmp)==i,]
         for (j in 1:length(rland$loci))
           {
-            alleledist <- as.factor(landscape.locus(lnum=j,rland.tmp)[,c(-1:-(landscape.democol()))])
+            alleledist <- as.factor(landscape.locus(rland.tmp,lnum=j)[,c(-1:-(landscape.democol()))])
             if (length(unique(alleledist))>1)
               retval[i,j] <- pegas::theta.k(alleledist)
             else
@@ -54,7 +54,7 @@ landscape.theta.s<- function(rland)
             retval[i,j] <- NA
             if ((rland$loci[[j]]$type==253))
               {
-                statevec <- landscape.locus.states(lnum=j,rland.tmp)$state
+                statevec <- landscape.locus.states(rland.tmp,lnum=j)$state
                 seqlen <- nchar(statevec[1])
                                         #            print(j)
                 print(paste("len statevec",length(statevec)))
@@ -81,12 +81,12 @@ landscape.tajima.d <- function(rland)
             retval[i,j] <- NA
             if ((rland$loci[[j]]$type==253))
               {
-                alleledist <- as.factor(landscape.locus(lnum=j,rland.tmp)[,c(-1:-(landscape.democol()))])
+                alleledist <- as.factor(landscape.locus(rland.tmp,lnum=j)[,c(-1:-(landscape.democol()))])
                 if (length(unique(alleledist))>1)
                   theta.ewens <- c(theta.k(alleledist),0)
                 else
                   theta.ewens <- c(NA,NA)
-                statevec <- landscape.locus.states(lnum=j,rland.tmp)$state
+                statevec <- landscape.locus.states(rland.tmp,lnum=j)$state
                 seqlen <- nchar(statevec[1])
                                         #            print(j)
                                         #                print(paste("len statevec",length(statevec)))

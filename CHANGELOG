@@ -1,3 +1,14 @@
+ver 3.0.1
+Even more UI changes.  Changed interface for several functions to standardize: When using functions that are exported and take a landscape, the landscape is always the first parameter now.  This allows the use of piping with magrittr. The functions that were modified are:
+	landscape.amova.locus
+	landscape.locus
+	landscape.locus.states
+	landscape.mismatchdist
+	landscape.states
+Routines that call these functions and do not use explicit parameter names will need to be adjusted accordingly
+
+ver 3.0.0
+Significant changes.  Eliminated all of the backend-implemented output routines
 ver 1.1.14
 fixed a lot of memory management issues
 ver 1.1.13

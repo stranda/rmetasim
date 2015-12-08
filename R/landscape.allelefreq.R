@@ -7,7 +7,7 @@ landscape.allelefreq <- function (Rland, tbl.out = FALSE)
     rv <- NULL
     for (i in 1:length(Rland$loci))
       {
-        alleles <- landscape.locus(i, Rland)[, c(-1:-(landscape.democol()))]
+        alleles <- landscape.locus(Rland,i)[, c(-1:-(landscape.democol()))]
 #        print(i)
         if (landscape.ploidy(Rland)[i]==2)
           {

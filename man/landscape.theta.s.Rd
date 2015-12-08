@@ -6,7 +6,7 @@
   the number of seqregating sites.}
 
 \usage{
- theta.s.mat <- landscape.theta.s(rland)
+  landscape.theta.s(rland)
 }
 \arguments{
   \item{rland}{the Rmetasim landscape object}

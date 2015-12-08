@@ -6,7 +6,7 @@
 Runs an amova on a locus.  Does not include information about sequence similarity or ssr size in analysis.  
 }
 \usage{
-landscape.amova.locus(l = 1, rland)
+landscape.amova.locus(rland, l = 1)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{

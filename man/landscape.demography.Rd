@@ -5,10 +5,10 @@
 \description{
   Calculate demographic parameters from a landscape:  CURRENTLY BROKEN!}
 \usage{
-  rland <- landscape.demography(rland)
+   landscape.demography(Rland)
 }
 \arguments{
-  \item{rland}{the Rmetasim landscape object}
+  \item{Rland}{the Rmetasim landscape object}
 }
 \value{
   A list of length populations+1.  The first 1..populations elements

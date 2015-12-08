@@ -12,7 +12,7 @@ This is the implementation of the allele object type.
 
 /*includes
 */
-
+#include<RandLib.h>
 #include <AlleleObj.h>
 
 Allele::Allele (double p, int s, int b, int /*d*/)
@@ -86,6 +86,8 @@ void SeqAllele::SetSite(char state, int sn)
 void SeqAllele::RandomSeq(double a, double c, double t, double g)
 {
   int numa, numc, numt, numg, i, sl;
+  double bc;
+  
   sl = SeqLen();
   i = 0;
 
@@ -95,25 +97,30 @@ void SeqAllele::RandomSeq(double a, double c, double t, double g)
       numa = 0; numc = 0; numt = 0; numg = 0;
       while (i<sl)
 	{
-	  if (a!=0.0 && (double(numa)/double(sl))<=a) 
+	  bc = RandLibObj.uniform();
+	  //	  if (a!=0.0 && (double(numa)/double(sl))<=a) 
+	  if (bc<a)
 	    {
 	      dnaseq[i]='A';
 	      numa++;
 	      i++;
 	    }
-	  if (c!=0.0 && (double(numc)/double(sl))<=c) 
+	  //	  if (c!=0.0 && (double(numc)/double(sl))<=c) 
+	  if ((a<=bc)&(bc<(a+c))) 
 	    {
 	      dnaseq[i]='C';
 	      numc++;
 	      i++;
 	    }
-	  if (t != 0.0 && (double(numt)/double(sl))<=t) 
+	    //	  if (t != 0.0 && (double(numt)/double(sl))<=t) 
+	  if (((a+c)<=bc)&(bc<t)) 
 	    {
 	      dnaseq[i]='T';
 	      numt++;
 	      i++;
 	    }
-	  if (g != 0 && (double(numg)/double(sl))<=g) 
+	    //	  if (g != 0 && (double(numg)/double(sl))<=g) 
+	  if ((a+c+t)<=bc) 
 	    {
 	      dnaseq[i]='G';
 	      numg++;
@@ -125,7 +132,7 @@ void SeqAllele::RandomSeq(double a, double c, double t, double g)
     {
       // throw an exception 
     }
-  random_shuffle(dnaseq.begin(), dnaseq.end());
+  random_shuffle(dnaseq.begin(), dnaseq.end(),randWrapper);
 }
 
 char SeqAllele::GetSite(int sn)
@@ -231,9 +238,11 @@ void SeqAllele::Scan(istream & stream)
       stream >> tmp;
       if (alist.find(tmp)==string::npos)
 	{
+#ifdef DEBUG
 	  cerr << "Problem with DNA sequence.  A base other than AGTCagtc read (could signify premature sequence end"<<endl;
 	  cerr << "Problem found at base: "<<i <<endl;
 	  assert(0==1);
+#endif
 	}
 
       dnaseq[i]=tmp;

@@ -21,19 +21,19 @@ using namespace std;
 
 void LocalMat::SetSize(size_t sz)
 {
-#ifdef RDEBUG
+#ifdef DEBUG
   cerr << "SetSize Slocal" <<endl;
 #endif
 
   Slocal.SetSize(sz);
 
-#ifdef RDEBUG
+#ifdef DEBUG
   cerr << "SetSize Rlocal" <<endl;
 #endif
 
   Rlocal.SetSize(sz);
 
-#ifdef RDEBUG
+#ifdef DEBUG
   cerr << "SetSize Mlocal" <<endl;
 #endif
 
@@ -67,7 +67,7 @@ istream &operator>>(istream & stream, LocalMat &lm)
 Landscape::Landscape (int /*h*/, int /*stg*/, int /*loc*/, int /*ep*/, int /*nd*/, int /*gn*/)
 {
   ndemo=1;
-#ifdef RDEBUG
+#ifdef DEBUG
   cerr << "Constructing landscape object" <<endl;
 #endif
   ///  init(h, stg, loc, ep, nd, gn);
@@ -77,7 +77,7 @@ Landscape::Landscape (int /*h*/, int /*stg*/, int /*loc*/, int /*ep*/, int /*nd*
 
 Landscape::~Landscape()
 {
-#ifdef RDEBUG
+#ifdef DEBUG
   cerr << "Destructing landscape object" <<endl;
 #endif
   /*
@@ -87,7 +87,7 @@ Landscape::~Landscape()
     }
 
 
-#ifdef RDEBUG
+#ifdef DEBUG
 	  cerr << "Landscape destructor: Deleting vectors and mats i= "<<i <<endl;
 #endif
 	  S.resize(0);
@@ -102,7 +102,7 @@ Landscape::~Landscape()
 	  LM.resize(0);
 	  demoProbVec.resize(0);
   */
-#ifdef RDEBUG
+#ifdef DEBUG
   cerr << "Landscape destructor exiting" <<endl;
 #endif
 
@@ -133,12 +133,12 @@ void Landscape::setepochs(int ep)
       M[i].SetSize(s*nhab)      ;
       if (int(demoProbVec[i].size())!=ndemo)
 	{
-#ifdef RDEBUG
+#ifdef DEBUG
 	  cerr << "sizing i of nep demoProbVec[i] to ndemo.  i="<<i<<" ndemo="<<ndemo <<endl;
 #endif
 	  demoProbVec[i].resize(ndemo);
 	}
-#ifdef RDEBUG
+#ifdef DEBUG
   cerr << "done sizing the demoProbVecs" <<endl;
 #endif
       evec[i].resize(nhab);
@@ -151,15 +151,15 @@ void Landscape::setndemo(int nd)
 {
   int i;
   ndemo=nd;
-#ifdef RDEBUG
+#ifdef DEBUG
   cerr << "REserving space for LM" <<endl;
 #endif
   LM.resize(ndemo);
-#ifdef RDEBUG
+#ifdef DEBUG
   cerr << "done REserving space for LM" <<endl;
 #endif
 
-#ifdef RDEBUG
+#ifdef DEBUG
   cerr << "Setting sizes of LM atrices to: "<<s <<endl;
 #endif
   for (i=0;i<ndemo;i++)
@@ -167,15 +167,15 @@ void Landscape::setndemo(int nd)
       LM[i].SetSize(s);
     }
 ///KKM 6.2.05..................................................................
-#ifdef RDEBUG
+#ifdef DEBUG
   cerr << "REserving space for LMK" <<endl;
 #endif
   LMK.resize(ndemo);
-#ifdef RDEBUG
+#ifdef DEBUG
   cerr << "done REserving space for LMK" <<endl;
 #endif
 
-#ifdef RDEBUG
+#ifdef DEBUG
   cerr << "Setting sizes of LMK matrices to: "<<s <<endl;
 #endif
   for (i=0;i<ndemo;i++)
@@ -183,7 +183,7 @@ void Landscape::setndemo(int nd)
       LMK[i].SetSize(s);
     }
 ///............................................................................
-#ifdef RDEBUG
+#ifdef DEBUG
   cerr << "Resizing the demoProbVecs to ndemo="<<ndemo <<endl;
 #endif
   for (i=0;i<nep;i++)
@@ -193,7 +193,7 @@ void Landscape::setndemo(int nd)
 	  demoProbVec[i].resize(ndemo);
 	}
     }
-#ifdef RDEBUG
+#ifdef DEBUG
   cerr << "About to exit setndemo" <<endl;
 #endif
 
@@ -211,44 +211,44 @@ void Landscape::setepochstart(int ce, int strt) {epochs[ce]=strt;}
 
 void Landscape::init(int h, int stg, int /*loc*/, int ep, int nd, int gn)
 {
-#ifdef RDEBUG
+#ifdef DEBUG
   cerr << "waiting for return to cont";
   cerr << endl;
   cerr << "Running: sethabs(h)" <<endl;
 #endif
   sethabs(h);
-#ifdef RDEBUG
+#ifdef DEBUG
   cerr << "Running: setstages(stg)" <<endl;
 #endif
   setstages(stg);
-#ifdef RDEBUG
+#ifdef DEBUG
   cerr << "Running: setepochs(ep)" <<endl;
 #endif
   setepochs(ep);
-#ifdef RDEBUG
+#ifdef DEBUG
   cerr << "Running: setndemo(nd)" <<endl;
 #endif
   setndemo(nd);
-#ifdef RDEBUG
+#ifdef DEBUG
   cerr << "Running: setgens(gn)" <<endl;
 #endif
   setgens(gn);
-#ifdef RDEBUG
+#ifdef DEBUG
   cerr << "Running: setMaxLandSize()" <<endl;
 #endif
   setMaxLandSize();
-#ifdef RDEBUG
+#ifdef DEBUG
   cerr << "Running: setself()" <<endl;
 #endif
   setself();
 
-#ifdef RDEBUG
+#ifdef DEBUG
   cerr << "Running: unsetRandEpoch()" <<endl;
 #endif
 
   unsetRandEpoch();
 
-#ifdef RDEBUG
+#ifdef DEBUG
   cerr << "done running: unsetRandEpoch()" <<endl;
 #endif
   t=0;
@@ -256,7 +256,7 @@ void Landscape::init(int h, int stg, int /*loc*/, int ep, int nd, int gn)
 
   title = "";
 
-#ifdef RDEBUG
+#ifdef DEBUG
   cerr << "Running:   I.resize(s * nhab)" <<endl;
 #endif
   I.resize(s * nhab);
@@ -268,7 +268,7 @@ void Landscape::init(int h, int stg, int /*loc*/, int ep, int nd, int gn)
 
   setnextID(1);
 
-#ifdef RDEBUG
+#ifdef DEBUG
   cerr << "end of init" <<endl;
 #endif
 
@@ -698,7 +698,9 @@ void Landscape::Survive()
 	  indx = I[i].GetCurrentIndex();
 	  if ((indx<0)||(ind.GetClass()<0))
 	    {
+#ifdef DEBUG
 	      cerr << " run off the the end of the individual map for class " << i<<endl;
+#endif
 	      assert(ind.GetClass()>=0);
 	    }
 	  if (ind.GetChanged()<t)
@@ -751,7 +753,8 @@ void Landscape::Survive()
    type double 
 
 */
-int Landscape::CalculateMaleGameteClassVector(PackedIndividual pi)
+//int Landscape::CalculateMaleGameteClassVector(PackedIndividual pi)
+int Landscape::CalculateMaleGameteClassVector(int k)
 {
 
   int i,sz;
@@ -761,7 +764,7 @@ int Landscape::CalculateMaleGameteClassVector(PackedIndividual pi)
   double *p = new double[sz];
   double clsz = 0.0, tmp, tmpct, tot=0;  
 
-  M[e].SetToState(pi.GetClass());
+  M[e].SetToState(k);
 
   ///  cerr <<"M[e].GetToState "<< M[e].GetToState()<<endl;
   ///multiply the individual class sizes times the m's
@@ -784,13 +787,15 @@ int Landscape::CalculateMaleGameteClassVector(PackedIndividual pi)
       for (i=0;i<sz;i++)
 	{
 	  p[i] = (n[i] / clsz );
-	  tot =+ p[i];
+	  tot += p[i];
 	}
       if (tot>1)
 	{
 	  if (tot > 1.1) //something is very wacky and the program should terminate
 	    {
+#ifdef DEBUG
 	      cerr << "the probabilities of choosing a class total to more than 1: total = "<<tot<<endl;
+#endif
 	      assert (tot<=1);
 	    }
 	  else
@@ -829,7 +834,13 @@ PackedIndividual Landscape::FindMate(PackedIndividual /*pi*/)
   mc = RandLibObj.PickMultinomial();
   //  tmpI.SetClass(-1);
 
+  //  cerr << "mc "<<mc<<endl;
+  //  int sz = I[mc].size();
+  //  cerr << "length I[mc] "<< sz <<endl;
+
   tmpI = I[mc].GetRandomInd();
+
+  //  tmpI = I[mc].GetIndividual(0);
   /*
       
   assert(tmpI.GetClass()>=0);
@@ -848,12 +859,15 @@ void Landscape::testfindmate(PackedIndividual pi)
 {
   PackedIndividual mate;
   size_t i;
+#ifdef DEBUG
   cerr << "target ind: " <<pi<<endl;
+#endif
   for (i=1;i<100;i++)
     {
       mate = FindMate(pi);
-
+#ifdef DEBUG
       cerr <<"potential mate # "<<i<<" :  "<< mate<<endl;
+#endif
     }
 }
 
@@ -876,7 +890,8 @@ void Landscape::Reproduce()
 {
   PackedIndividual tmpI, mate, searchI;
   vector < double > pvec;
-  int err, indx;
+  //  int err;
+  //  int indx;
   int q,noff ;
   size_t j, k, l, sz, lsz ;
   sz = nhab * s;
@@ -896,71 +911,23 @@ void Landscape::Reproduce()
 	  I[k].ResetIndividuals();///set an internal pointer to I[k] first ind in list
 	  
 	  lsz=I[k].size();
-	  for (l=0;l<lsz;l++)
-	    {
-	      searchI = I[k].GetCurrentIndividual();
-	      if (searchI.GetClass()<0)
+	  if (CalculateMaleGameteClassVector(k))
+	    {  
+	      for (l=0;l<lsz;l++)
 		{
-		  cerr << "no individual returned from deomgraphic class"<<endl;
-		  assert(searchI.GetClass()==0);
-		}
-	      indx = I[k].GetCurrentIndex();
-	      ///decides where pollen comes from 
-	      if (CalculateMaleGameteClassVector(searchI))
-		{
+		  searchI = I[k].GetCurrentIndividual();
+		  if (searchI.GetClass()<0)
+		    {
+#ifdef DEBUG
+		      cerr << "no individual returned from deomgraphic class"<<endl;
+#endif
+		      assert(searchI.GetClass()==0);
+		    }
+		  //		  indx = I[k].GetCurrentIndex();
 
-
-/**
-
-Iterate through the possible new classes of offspring.  By this I mean
-the classes to which offspring could disperse.  For each possible
-class, choose a number of offspring to put in that class.
-
-After the number of offspring are chosen, they are generated by
-finding a male from a multinomial distribution given by the
-appropriate column of the M[e] matrix.
-
-***** This approach is definitely wrong if you want to link in
-***** selection.  To do that I think you would have to:
-
-1) take the external multinomial vector of potential dispersal sites
-given in the R[e] matrix columns.  In the current implementation,
-these represent means of poisson distributions.  They could also be
-modified to be probabilities of dispersal to a particular distance
-(realized dispersal).  Either way, these vectors must be modified or
-generated anew for each offspring produced.
-
-2) The modification has to depend upon the genotype of the offspring, 
-of course   the simplest way would be to look at the offsprings genotype 
-and generate a multinomial probability dist of dispersing to a site.  That 
-multinomial distribution would, no doubt be determined by a continuous 
-pdf based upon dispersal mechanics.  A nice improvement would be the ability 
-to modify an underlying vector of environmental distances specified in the R[e] 
-matrix input by the user using a distribution produced by the genotype.  
-
-3) As for the expression of genotype, I would start with an additive model.  
-There are two classes of numerically based loci already.  InfAlleles increase 
-their integer state monotonically from 0..N.  Not really very useful.  
-StepAlleles implemented in the StepAlleleTable are better.  These alleles' 
-states drift back and forth from the current state.  This class
-implements a strict stepwise mutation model. You could also define
-your own mutation model.  Anyway, I would take the sum of the
-numerical value of the allele states across all loci involved.  This
-single number would determine phenotype.  You could add noise to
-simulate developmental/environmantal differences among genotypes
-
-The types of functions that you would need to use on individuals
-(PackedIndividuals) are described in DemoClass.h.  Remeber, you can
-ResetIndividuals() and reset the pointer to the first ind.  Then you
-can iterate through the list by getting the NextIndivdual.
-
-Once you have an individual in hand, use the methods in PackedIndividual.h 
-to change it, look at it or its alleles, etc.  Try not to change 
-PAckedIndividual.h
-
-
-*/
-		  for (j=0;j<sz;j++)
+		  //iterate through mothers
+		  
+                  for (j=0;j<sz;j++)
 		    {
 		      R[e].SetToState(j);
 		      ///pick a number of offspring from a Poisson dist with mean=R[tostate,fromstate]
@@ -971,16 +938,16 @@ PAckedIndividual.h
 			{
 			  noff=0;
 			}
-
+		      
 		      if (noff>0)
 			{
 			  I[k].SetCurrentLastRep(t);
 			  I[k].SetCurrentNumOff(noff);
 			  
 			  /*
-choosing mate.  At this point the effects of genotype upon the mates
-ability to produce pollen could be inserted.
- */
+			    choosing mate.  At this point the effects of genotype upon the mates
+			    ability to produce pollen could be inserted.
+			  */
 			  if (!multiple_paternity)///all offspring from one father
 			    {
 			      if (RandLibObj.uniform()<self)
@@ -989,7 +956,7 @@ ability to produce pollen could be inserted.
 				}
 			      else
 				{
-				  mate = FindMate(searchI);
+				    mate = FindMate(searchI);
 				}
 			    }
 			  for (q=0;q<noff;q++)
@@ -1010,18 +977,18 @@ ability to produce pollen could be inserted.
 			      if (mate.GetClass()>-1)//if no mate, no offspring
 				{
 				  tmpI = searchI.repro_sex(searchI,mate,t,Atbls);
-		
+				  
 				  tmpI.SetClass(j);
 				  
 				  ///this could/should be made user selectable
 				  tmpI.SetSex(0);///would require some more code modifications, but might be worth it
-
+				  
 				  tmpI.SetGen(t);
-
+				  
 				  tmpI.SetMID(0);
 				  tmpI.SetPID(0);
 				  tmpI.SetID(0);
-
+				  
 				  tmpI.SetMID(searchI.GetID());
 				  tmpI.SetPID(mate.GetID());
 				  tmpI.SetID(nextID);
@@ -1033,30 +1000,33 @@ ability to produce pollen could be inserted.
 				    {
 				      nextID=nextID+1;
 				    }
-
+				  
 				  tmpI.Change(-1);
 				  //cerr<<"running birth"<<endl;
-
+				  
 				  tmpI.Birth(t,Atbls);
-
+				  
 				  //cerr<<"birth run"<<endl;
-				  err = 0;
+				  //				  err = 0;
 				  if (I[j].AddIndividual(tmpI)<0)
 				    {
+#ifdef DEBUG
 				      cerr << "adding an individual failed" << endl;
+#endif
 				    }
 				  //cerr<<"added an individual.  ID"<<nextID<<endl;
 				}
 			    } //q
-			
+			  
 			}//end if noff>0
 		    }//j
-		  RandLibObj.FreeDiscreteLookup();
-		}//are there males?
-	      I[k].NextIndividual();
-	    }//l
-	} //if R[e].AnyFrom
-    }//k 
+ RandLibObj.FreeDiscreteLookup();
+ I[k].NextIndividual();
+		}//l
+	}
+    } //if R[e].AnyFrom
+      
+}//k 
 
 }//end of function Reproduce
 
@@ -1322,7 +1292,9 @@ ostream &operator<<(ostream &stream, Landscape &l)
 	}
       else
 	{
+#ifdef DEBUG
 	  cerr << "Don't understand the ID of this locus " <<endl;
+#endif
 	  assert(0==1);
 	}
       l.Atbls[i]->Write(stream);
@@ -1417,12 +1389,12 @@ istream &operator>>(istream & stream, Landscape &l)
 		    stream >> l.ndemo;
 		    if (l.ndemo==0)
 		      {
-#ifdef RDEBUG
+#ifdef DEBUG
 			cerr << "chose not to use the habitat-level demography specification"<<endl;
 #endif
 		      }
-#ifdef RDEBUG
-  cerr << "Running l.setndemo in the landcape inserter "<<l.s <<endl;
+#ifdef DEBUG
+		    cerr << "Running l.setndemo in the landcape inserter "<<l.s <<endl;
 #endif
 		    l.setndemo(l.ndemo);
 		  }
@@ -1431,7 +1403,7 @@ istream &operator>>(istream & stream, Landscape &l)
 		    stream >> l.rdemo;
 		    if (l.rdemo)
 		      {
-#ifdef RDEBUG
+#ifdef DEBUG
 			cerr << "chose to randomly assign habitat-level demography specification"<<endl;
 #endif
 		      }
@@ -1482,7 +1454,9 @@ istream &operator>>(istream & stream, Landscape &l)
 		    epochprobs=0;
 		    if (totprob!=1)
 		      {
+#ifdef DEBUG
 			cerr << "epoch probabilities do not sum to one" <<endl;;
+#endif
 			assert(totprob==1);
 		      }
 		  }
@@ -1547,7 +1521,9 @@ istream &operator>>(istream & stream, Landscape &l)
 		      }
 		    else
 		      {
+#ifdef DEBUG
 			cerr << "already defined popsize vectors, can't define inds";
+#endif
 			assert(1==0);
 		      }
 		  }
@@ -1567,13 +1543,17 @@ istream &operator>>(istream & stream, Landscape &l)
 		      }
 		    else
 		      {
+#ifdef DEBUG
 			cerr << "already defined individual vectors";
+#endif
 			assert(0);
 		      }
 		  }
 		else
 		  {
+#ifdef DEBUG
 		    cerr << "unrecognized token `" << c << "' in Landscape inserter"<<endl ;
+#endif
 		  }
 	      }
 	      else
@@ -1598,7 +1578,9 @@ istream &operator>>(istream & stream, Landscape &l)
     }
   if (epochprobs)
     {
+#ifdef DEBUG
       cerr << "asked for random epochs, but did not include probabilities" <<endl; ;
+#endif
       assert(1==2);
     }
   l.GCAlleles();
@@ -1626,11 +1608,11 @@ Landscape_statistics::Landscape_statistics (int /*h*/, int /*stg*/, int /*loc*/,
 Landscape_statistics::~Landscape_statistics ()
 {
 	  
-#ifdef RDEBUG
+#ifdef DEBUG
   cerr << "Landscape_statistics destructor starting" <<endl;
 #endif
 
-#ifdef RDEBUG
+#ifdef DEBUG
   cerr << "Landscape_statistics destructor exiting" <<endl;
 #endif
 
@@ -1668,779 +1650,6 @@ double Landscape_statistics::GenLength()
     }
   tmp = gensiz/totparents;
   return tmp;
-}
-
-void Landscape_statistics::ArlequinDiploidOut(int numind, ostream &streamout)
-{
-
-  int i,j, k, ss, ps;
-  size_t sz;
-  vector <PackedIndividual> IVec;
-  vector <int> diptbl;
-
-  //find the number of occupied habitats
-
-  IVec.reserve(numind);
-  diptbl.reserve(nloc);
-  
-  for (k=0;k<nloc;k++)
-    {
-      if (Atbls[k]->getPloidy()==2)
-	{
-	  diptbl.push_back(k);
-	}
-    }
-
-  j=0;
-
-  streamout << "# output from Metasim "<<endl;
-  streamout << "# number of stages per habitat: "<< s << endl;
-  streamout << "# number of habitats: "<< nhab << endl;
-  streamout << "# current sizes of the habitats (in order): "<<endl<<"# ";
-  for (i=0;i<nhab;i++)
-    {
-      streamout << PopSize(i) << "   ";
-      if (PopSize(i)>0)
-	{
-	  j++;
-	}
-    }
-  streamout << endl;
-
-  streamout << "# Number of generations elapsed (current gen): "<<t<<endl;
-  streamout << "# Begin dataset "<<endl;
-
-  streamout << "[Profile] "<< endl;
-  streamout << "Title = \""<<title<<".  Generation "<<t << "\"" <<endl;
-  streamout << "NbSamples = "<< j <<endl;
-  streamout << "DataType = STANDARD " <<endl;
-  streamout << "GenotypicData=1 " <<endl;
-  streamout << "LocusSeparator = WHITESPACE" <<endl;
-  streamout << "GameticPhase=0 " <<endl;
-  streamout << "RecessiveData=0 " <<endl;
-
-  streamout << "[Data]" <<endl;
-  streamout << "[[Samples]]" <<endl;
-  for (i=0;i<nhab;i++)
-    {
-      ps = PopSize(i);
-      if (ps>0)
-	{
-	  IVec.resize(0);
-	  for (j=i*s;j<((i*s)+s);j++)
-	    {
-	      I[j].ResetIndividuals();
-	      for (sz=0;sz<I[j].size();sz++)
-		{
-		  IVec.push_back(I[j].GetCurrentIndividual());
-		  I[j].NextIndividual();
-		}
-	    }
-	  random_shuffle(IVec.begin(),IVec.end());
-	  streamout << "Samplename = \"Pop_"<< i << "\"" << endl;
-	  if (ps>numind)
-	    {
-	      streamout << "SampleSize = "<<numind<<endl;
-	      ss = numind;
-	    }
-	  else
-	    {
-	      streamout << "SampleSize = "<< ps <<endl;
-	      ss = ps;
-	    }
-	  streamout << "SampleData = {"<<endl;
-	  
-	  for (j=0;j<ss;j++)
-	    {
-	      streamout << "Ind_"<<j<<"_Cl_"<<IVec[j].GetClass()<<" 1 \t";
-	      for (sz=0;sz<diptbl.size();sz++)
-		{
-		  streamout << IVec[j].GetAllele(diptbl[sz],0) << " \t";
-		}
-	      streamout << endl << "        \t";
-	      for (sz=0;sz<diptbl.size();sz++)
-		{
-		  streamout << IVec[j].GetAllele(diptbl[sz],1) << " \t";
-		}
-	      streamout << endl;
-	    }
-	  streamout << "}"<<endl;
-	}
-    }
-}
-
-
-
-void Landscape_statistics::ArlequinHaploidOut(int numind, ostream &streamout)
-{
-
-  int i,j, k, ss, ps;
-  size_t sz;
-  vector <PackedIndividual> IVec;
-  vector <int> diptbl;
-  map<string, int, ltstr > htypes ;
-  map<string, int, ltstr >::iterator tmpiter ;
-  ostringstream *strstrmp;
-  string strng;
-
-  //find the number of occupied habitats
-
-  IVec.reserve(numind);
-  diptbl.reserve(nloc);
-  
-  for (k=0;k<nloc;k++)
-    {
-      if (Atbls[k]->getPloidy()==1)
-	{
-	  diptbl.push_back(k);
-	}
-    }
-
-  j=0;
-
-  streamout << "# output from Metasim "<<endl;
-  streamout << "# number of stages per habitat: "<< s << endl;
-  streamout << "# number of habitats: "<< nhab << endl;
-  streamout << "# current sizes of the habitats (in order): "<<endl<<"# ";
-  for (i=0;i<nhab;i++)
-    {
-      streamout << PopSize(i) << "   ";
-      if (PopSize(i)>0)
-	{
-	  j++;
-	}
-    }
-  streamout << endl;
-
-  streamout << "# Number of generations elapsed (current gen): "<<t<<endl;
-  streamout << "# Begin dataset "<<endl;
-
-  streamout << "[Profile] "<< endl;
-  streamout << "Title = \""<<title<<".  Generation "<<t << "\"" <<endl;
-  streamout << "NbSamples = "<< j <<endl;
-  streamout << "DataType = STANDARD " <<endl;
-  streamout << "GenotypicData=0 " <<endl;
-  streamout << "LocusSeparator = WHITESPACE" <<endl;
-  streamout << "GameticPhase=1 " <<endl;
-  streamout << "RecessiveData=0 " <<endl;
-
-  streamout << "[Data]" <<endl;
-  streamout << "[[Samples]]" <<endl;
-  for (i=0;i<nhab;i++)
-    {
-      ps = PopSize(i);
-      if (ps>0)
-	{
-	  IVec.resize(0);
-	  for (j=i*s;j<((i*s)+s);j++)
-	    {
-	      I[j].ResetIndividuals();
-	      for (sz=0;sz<I[j].size();sz++)
-		{
-		  IVec.push_back(I[j].GetCurrentIndividual());
-		  I[j].NextIndividual();
-		}
-	    }
-	  random_shuffle(IVec.begin(),IVec.end());
-	  streamout << "Samplename = \"Pop_"<< i << "\"" << endl;
-	  if (ps>numind)
-	    {
-	      streamout << "SampleSize = "<<numind<<endl;
-	      ss = numind;
-	    }
-	  else
-	    {
-	      streamout << "SampleSize = "<< ps <<endl;
-	      ss = ps;
-	    }
-	  streamout << "SampleData = {"<<endl;
-	  
-	  for (j=0;j<ss;j++)
-	    {
-	      strstrmp = new ostringstream;
-	      for (sz=0;sz<diptbl.size();sz++)
-		{
-		  IVec[j].WriteState(diptbl[sz],0,Atbls,*strstrmp) ;
-		  *strstrmp << " ";
-		}
-	      *strstrmp << ends;
-	      strng = strstrmp->str();
-	      tmpiter = htypes.find(strng);
-	      if (tmpiter!=htypes.end())
-		{
-		  (*tmpiter).second=(*tmpiter).second++;
-		}
-	      else
-		{
-		  htypes[strng]=1;
-		}
-	      cerr << strng <<endl;
-	      delete strstrmp;
-	    }
-
-	  j=1;
-	  for (tmpiter=htypes.begin();tmpiter!=htypes.end();tmpiter++)
-	    {
-	      streamout << "Hap_"<<j << "_"<<i<<"  "<<(*tmpiter).second<<" "<<(*tmpiter).first<<endl;
-	      j++;
-	    }
-	  streamout << "}"<<endl;
-	  htypes.clear();
-	}
-    }
-}
-
-
-void Landscape_statistics::GenepopOut(int numind, ostream &streamout)
-{
-
-  int i,j, k, q, ss, ps;
-  size_t sz;
-  vector <PackedIndividual> IVec;
-  vector <int> diptbl;
-
-  //find the number of occupied habitats
-
-  IVec.reserve(numind);
-  diptbl.reserve(nloc);
-  
-  for (k=0;k<nloc;k++)
-    {
-      diptbl.push_back(k);
-    }
-
-  j=0;
-
-  for (i=0;i<nhab;i++)
-    {
-      if (PopSize(i)>0)
-	{
-	  j++;
-	}
-    }
-  streamout << "Metasim output";
-  streamout << ": stages: "<< s ;
-  streamout << ": habitats: "<< nhab << "  occupied: "<<j;
-  streamout << ": generations: "<<t<<endl;
-  for (sz=0;sz<diptbl.size();sz++)
-    {
-      streamout << "L"<<diptbl[sz]<<"Pl"<<Atbls[diptbl[sz]]->getPloidy()<<"mu"<<Atbls[diptbl[sz]]->getMutationRate() <<endl;
-    }
-
-  for (i=0;i<nhab;i++)
-    {
-      ps = PopSize(i);
-      if (ps>0)
-	{
-	  IVec.resize(0);
-	  for (j=i*s;j<((i*s)+s);j++)
-	    {
-	      I[j].ResetIndividuals();
-	      for (sz=0;sz<I[j].size();sz++)
-		{
-		  IVec.push_back(I[j].GetCurrentIndividual());
-		  I[j].NextIndividual();
-		}
-	    }
-	  random_shuffle(IVec.begin(),IVec.end());
-
-	  streamout << "POP" << endl;
-
-	  if (ps>numind)
-	    {
-	      ss = numind;
-	    }
-	  else
-	    {
-	      ss = ps;
-	    }
-	  
-	  for (j=0;j<ss;j++)
-	    {
-	      streamout << "Pop"<<i<<" Ind "<<j<<" Cl "<<IVec[j].GetClass()<<",  ";
-	      for (sz=0;sz<diptbl.size();sz++)
-		{
-		  for (q=0;q<Atbls[diptbl[sz]]->getPloidy();q++)
-		    {
-		      streamout << setw(2) << IVec[j].GetAllele(diptbl[sz],q)+1;
-		    }
-		  streamout << " ";
-		}
-	      streamout << endl;
-	    }
-	}
-    }
-}
-
-void Landscape_statistics::MicroRatOut(int numind, ostream &streamout )
-{
-
-  int i,j, k, q, ss, ps;
-  size_t sz;
-  vector <PackedIndividual> IVec;
-  vector <int> diptbl;
-
-  //find the number of occupied habitats
-
-  IVec.reserve(numind);
-  diptbl.reserve(nloc);
-  
-  for (k=0;k<nloc;k++)
-    {
-      diptbl.push_back(k);
-    }
-
-  j=0;
-
-  for (i=0;i<nhab;i++)
-    {
-      if (PopSize(i)>0)
-	{
-	  j++;
-	}
-    }
-  streamout << "Metasim output";
-  streamout << ": stages: "<< s ;
-  streamout << ": habitats: "<< nhab << "  occupied: "<<j;
-  streamout << ": generations: "<<t<<endl;
-  for (sz=0;sz<diptbl.size();sz++)
-    {
-      streamout << "L"<<diptbl[sz]<<"Pl"<<Atbls[diptbl[sz]]->getPloidy()<<"mu"<<Atbls[diptbl[sz]]->getMutationRate() <<endl;
-    }
-
-  for (i=0;i<nhab;i++)
-    {
-      ps = PopSize(i);
-      if (ps>0)
-	{
-	  IVec.resize(0);
-	  for (j=i*s;j<((i*s)+s);j++)
-	    {
-	      I[j].ResetIndividuals();
-	      for (sz=0;sz<I[j].size();sz++)
-		{
-		  IVec.push_back(I[j].GetCurrentIndividual());
-		  I[j].NextIndividual();
-		}
-	    }
-	  random_shuffle(IVec.begin(),IVec.end());
-
-	  streamout << "POP" << endl;
-
-	  if (ps>numind)
-	    {
-	      ss = numind;
-	    }
-	  else
-	    {
-	      ss = ps;
-	    }
-	  
-	  for (j=0;j<ss;j++)
-	    {
-	      streamout << "Pop"<<i<<" Ind "<<j<<" Cl "<<IVec[j].GetClass()<<", , , ";
-	      for (sz=0;sz<diptbl.size();sz++)
-		{
-		  for (q=0;q<Atbls[diptbl[sz]]->getPloidy();q++)
-		    {
-		      streamout<<setw(2)<<IVec[j].GetAllele(diptbl[sz],q)+1;
-		    }
-		  streamout << " ";
-		}
-	      streamout << endl;
-	    }
-	}
-    }
-}
-
-void Landscape_statistics::GdaOut(int numind, ostream &streamout )
-{
-
-  int i,j, k, q, ss, ps, pp=0;
-  size_t sz;
-  vector <PackedIndividual> IVec;
-  vector <int> diptbl, haptbl;
-  ostringstream poplist;
-
-  //find the number of occupied habitats
-
-  IVec.reserve(numind);
-  diptbl.reserve(nloc);
-  haptbl.reserve(nloc);
-  
-  for (k=0;k<nloc;k++)
-    {
-      if (Atbls[k]->getPloidy()==2)
-	{
-	  diptbl.push_back(k);
-	}
-      if (Atbls[k]->getPloidy()==1)
-	{
-	  haptbl.push_back(k);
-	}
-    }
-
-  j=0;
-
-  for (i=0;i<nhab;i++)
-    {
-      if (PopSize(i)>0)
-	{
-	  j++;
-	}
-    }
-
-  streamout << "#Nexus"<<endl;
-  streamout << "begin gdadata; ";
-
-  streamout << "[Metasim diploid output";
-  streamout << ": stages: "<< s ;
-  streamout << ": habitats: "<< nhab << "  occupied: "<<j;
-  streamout << ": generations: "<<t<<" ]"<<endl;
-  streamout << "dimensions npops="<<j<<" nloci="<<haptbl.size()+diptbl.size()<<";"<<endl;
-  streamout << "format missing=? separator=/;"<<endl;
-  streamout << "hapset 1-"<< haptbl.size()<<";"<<endl;
-
-  streamout << "matrix "<<endl;
-  for (i=0;i<nhab;i++)
-    {
-      ps = PopSize(i);
-      if (ps>0)
-	{
-	  IVec.resize(0);
-	  for (j=i*s;j<((i*s)+s);j++)
-	    {
-	      I[j].ResetIndividuals();
-	      for (sz=0;sz<I[j].size();sz++)
-		{
-		  IVec.push_back(I[j].GetCurrentIndividual());
-		  I[j].NextIndividual();
-		}
-	    }
-	  random_shuffle(IVec.begin(),IVec.end());
-
-	  if ((i>0)&&(pp>0))
-	    {
-	      streamout << endl << "," << endl;
-	      poplist << ", ";
-	    }
-	  streamout << "POP_"<< i <<"_Size_"<<PopSize(i)<<":" << endl;
-	  poplist << "POP_"<< i <<"_Size_"<<PopSize(i);
-
-	  if (ps>numind)
-	    {
-	      ss = numind;
-	    }
-	  else
-	    {
-	      ss = ps;
-	    }
-	  
-	  for (j=0;j<ss;j++)
-	    {
-	      streamout << "Ind_"<<j<<"_Cl_"<<IVec[j].GetClass()<<"  ";
-	      for (sz=0;sz<haptbl.size();sz++)
-		{
-		  streamout <<IVec[j].GetAllele(haptbl[sz],0)+1;
-		  streamout << " ";
-		}
-	      for (sz=0;sz<diptbl.size();sz++)
-		{
-		  for (q=0;q<Atbls[diptbl[sz]]->getPloidy();q++)
-		    {
-		      if (q>0)
-			{
-			  streamout <<"/"; //add in the allele seperator
-			}
-		      streamout << IVec[j].GetAllele(diptbl[sz],q)+1;
-		    }
-		  streamout << " ";
-		}
-	      streamout << endl;
-	    }
-	  pp++;
-	}
-    }
-  poplist << ends;
-  streamout << ";"<<endl<<"end;" << endl;
-
-  streamout << "begin trees;"<<endl<<"tree popstruct = (" << poplist.str() << ");" <<endl<<"end;"<<endl;
-}
-
-
-void Landscape_statistics::MigrateDiploidOut(int numind, ostream &streamout)
-{
-
-  int i,j, k, ss, ps;
-  size_t sz;
-  vector <PackedIndividual> IVec;
-  vector <int> diptbl;
-
-  //find the number of occupied habitats
-
-  IVec.reserve(numind);
-  diptbl.reserve(nloc);
-  
-  for (k=0;k<nloc;k++)
-    {
-      if (Atbls[k]->getPloidy()==2)
-	{
-	  diptbl.push_back(k);
-	}
-    }
-
-  j=0;
-
-  for (i=0;i<nhab;i++)
-    {
-      if (PopSize(i)>0)
-	{
-	  j++;
-	}
-    }
-  streamout << j << " " << diptbl.size() << " " ;
-  streamout << "Metasim out";
-  streamout << ": stg: "<< s ;
-  streamout << ": hab: "<< nhab ;
-  streamout << ": gen: "<<t<<endl;
-  for (i=0;i<nhab;i++)
-    {
-      ps = PopSize(i);
-      if (ps>0)
-	{
-	  IVec.resize(0);
-	  for (j=i*s;j<((i*s)+s);j++)
-	    {
-	      I[j].ResetIndividuals();
-	      for (sz=0;sz<I[j].size();sz++)
-		{
-		  IVec.push_back(I[j].GetCurrentIndividual());
-		  I[j].NextIndividual();
-		}
-	    }
-	  random_shuffle(IVec.begin(),IVec.end());
-
-	  if (ps>numind)
-	    {
-	      ss = numind;
-	    }
-	  else
-	    {
-	      ss = ps;
-	    }
-
-	  streamout<<setw(3)<<ss;
-	  streamout << "  Pop"<<i<<" Size"<<ps<<"\n";
-
-	  
-	  for (j=0;j<ss;j++)
-	    {
-
-	      streamout <<"I"<<setw(3)<<"  "<<IVec[j].GetClass();
-	      for (sz=0;sz<diptbl.size();sz++)
-		{
-		  streamout <<" "<<char(IVec[j].GetAllele(diptbl[sz],0)+65);
-		  streamout <<char(IVec[j].GetAllele(diptbl[sz],1)+65);
-		}
-	      streamout << endl;
-	    }
-	}
-    }
-}
-void Landscape_statistics::BiosysDiploidOut(int numind, ostream &streamout )
-{
-
-  int i,j, k, ss, ps;
-  size_t sz;
-  vector <PackedIndividual> IVec;
-  vector <int> diptbl;
-  map <int, int, less <int> > loclook;
-
-  //find the number of occupied habitats
-
-  IVec.reserve(numind);
-  diptbl.reserve(nloc);
-  
-  for (k=0;k<nloc;k++)
-    {
-      if (Atbls[k]->getPloidy()==2)
-	{
-	  diptbl.push_back(k);
-	}
-    }
-
-  j=0;
-
-  for (i=0;i<nhab;i++)
-    {
-      if (PopSize(i)>0)
-	{
-	  j++;
-	}
-    }
-  streamout << "Metasim output";
-  streamout << ": stages: "<< s ;
-  streamout << ": habitats: "<< nhab << "  occupied: "<<j;
-  streamout << ": generations: "<<t<<endl;
-  streamout << "NOTU=" << j << ",NLOC=" << diptbl.size() << ", NALL=100 ;" << endl;
-  streamout << "("<<diptbl.size()<<"(1X,A3))"<<endl;
-  for (sz=0;sz<diptbl.size();sz++)
-    {
-      streamout << "L"<<setw(2)<<diptbl[sz];
-    }
-
-  streamout << endl;
-  streamout << "STEP DATA:"<<endl;
-  streamout << "DATYP=1,NUMER;"<<endl;
-  streamout << "(A4, "<<diptbl.size()<<"(1X,I3,I3))"<<endl;
-  for (i=0;i<nhab;i++)
-    {
-      ps = PopSize(i);
-      if (ps>0)
-	{
-	  IVec.resize(0);
-	  for (j=i*s;j<((i*s)+s);j++)
-	    {
-	      I[j].ResetIndividuals();
-	      for (sz=0;sz<I[j].size();sz++)
-		{
-		  IVec.push_back(I[j].GetCurrentIndividual());
-		  I[j].NextIndividual();
-		}
-	    }
-	  random_shuffle(IVec.begin(),IVec.end());
-
-	  streamout << "P"<< setw(3) << i << endl;
-
-	  if (ps>numind)
-	    {
-	      ss = numind;
-	    }
-	  else
-	    {
-	      ss = ps;
-	    }
-	  
-	  for (j=0;j<ss;j++)
-	    {
-	      for (sz=0;sz<diptbl.size();sz++)
-		{
-
-		  if (loclook.find(IVec[j].GetAllele(diptbl[sz],0))==loclook.end())
-		    {
-		      loclook[IVec[j].GetAllele(diptbl[sz],0)] = loclook.size()+1;
-		    }
-		  if (loclook.find(IVec[j].GetAllele(diptbl[sz],1))==loclook.end())
-		    {
-		      loclook[IVec[j].GetAllele(diptbl[sz],1)] = loclook.size()+1;
-		    }
-		}
-	    }
-
-	  for (j=0;j<ss;j++)
-	    {
-
-	      streamout << "I" <<setw(3)<<IVec[j].GetClass();
-	      for (sz=0;sz<diptbl.size();sz++)
-		{
-		  streamout << setw(3)<<loclook[IVec[j].GetAllele(diptbl[sz],0)]
-		            << setw(3)<<loclook[IVec[j].GetAllele(diptbl[sz],1)];
-		}
-	      streamout << endl;
-	    }
-	  streamout << "NEXT" <<endl;
-	}
-    }
-  streamout << "END;" <<endl;
-
-  ///adds procedures to the biosys file
-  streamout << "STEP VARIAB:"<<endl<<"FULLOUT"<<endl<<"END;"<<endl;
-  streamout << "STEP HDYWBG:"<<endl<<"END;"<<endl;
-  streamout << "STEP SIMDIS:"<<endl<<"NEI"<<endl<<"END;"<<endl;
-  streamout << "STEP COEFOUT:"<<endl<<"ABOVE=1,BELOW=2;"<<endl<<"END;"<<endl;
-  streamout << "STEP FSTAT:"<<endl<<"OUTPUT=1;"<<endl<<"END;"<<endl;
-  streamout << "STEP HETXSQ:"<<endl<<"END;"<<endl;
-}
-
-
-void Landscape_statistics::ROut(int numind, ostream &streamout)
-{
-
-  int i,j, k, ss, ps, p;
-  size_t sz;
-  vector <PackedIndividual> IVec;
-  vector <int> diptbl;
-
-  //find the number of occupied habitats
-
-
-  IVec.reserve(numind);
-  diptbl.reserve(nloc);
-  
-  for (k=0;k<nloc;k++)
-    {
-      diptbl.push_back(k);
-    }
-
-  ps=0;
-  j=0;
-
-  for (i=0;i<nhab;i++)
-    {
-      if (PopSize(i)>0)
-	{
-	  j++;
-	}
-    }
-
-  streamout << "pop class individual locus aindex allele"<<endl;
-
-  for (i=0;i<nhab;i++)
-    {
-      ps = PopSize(i);
-      if (ps>0)
-	{
-	  IVec.resize(0);
-	  for (j=i*s;j<((i*s)+s);j++)
-	    {
-	      I[j].ResetIndividuals();
-	      for (sz=0;sz<I[j].size();sz++)
-		{
-		  IVec.push_back(I[j].GetCurrentIndividual());
-		  I[j].NextIndividual();
-		}
-	    }
-	  random_shuffle(IVec.begin(),IVec.end());
-
-
-	  if (ps>numind)
-	    {
-	      ss = numind;
-	    }
-	  else
-	    {
-	      ss = ps;
-	    }
-	  
-	  for (j=0;j<ss;j++)
-	    {
-
-	      for (sz=0;sz<diptbl.size();sz++)
-		{
-		  for (p=0;p<Atbls[sz]->getPloidy();p++)
-		    {
-		      streamout << setw(3) <<i; //population
-		      streamout << " " << setw(3) << IVec[j].GetClass();//class
-		      streamout << " " << setw(3) << j; //individual
-		      streamout << " " << setw(3) << sz;//locus
-		      streamout <<" "  << setw(3) << p;//allele index
-		      streamout << " " << setw(3) << IVec[j].GetAllele(diptbl[sz],p) ;//allele
-		      streamout << endl;
-		    }
-		}
-	    }
-	}
-    }
 }
 
 
@@ -2493,7 +1702,7 @@ vector <int>  Landscape_statistics::Rmat(int numind)
 		  I[j].NextIndividual();
 		}
 	    }
-	  random_shuffle(IVec.begin(),IVec.end());
+	  random_shuffle(IVec.begin(),IVec.end(),randWrapper);
 
 
 	  if ((numind>0)&&(ps>numind))

@@ -94,7 +94,13 @@ int DemoClass::GetRandomIndex ()
 
   while (f==0) // keep trying until an individual is found
     {
-      indx = RandLibObj.unirange(maxind);
+
+      //      cerr <<"maxind "<< maxind << endl;
+      //      indx = RandLibObj.unirange(maxind); //fix the bug JDR found (5/31/2014)
+      indx = RandLibObj.unirange((maxind-1));
+
+      //      cerr << "RandomIndex "<<indx<<endl;
+
       if (I.find(indx)!=I.end())
 	{
 	  f=1;
@@ -143,7 +149,8 @@ void DemoClass::CompressClass (double frac)
 double DemoClass::GenLength (int t)
 {
   double genoff, totoff;
-  int indx;
+  //  int indx;
+
 
   int lr, no;
 
@@ -154,11 +161,11 @@ double DemoClass::GenLength (int t)
       ResetIndividuals();
       do
 	{
-	  indx = GetCurrentIndex();
+	  //	  indx = GetCurrentIndex();
 	  lr = GetCurrentLastRep();
 	  no =  GetCurrentNumOff();
-	  genoff =+ ((t - lr) * no);
-	  totoff =+ no;
+	  genoff += ((t - lr) * no);
+	  totoff += no;
 	}
       while (!NextIndividual());
       if (totoff==0) 

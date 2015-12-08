@@ -94,7 +94,7 @@ countPopulation <- function (nPop, Rland)
 
 indxfreqWithout <-function(IndNum, lnum=1, Rland)
   {
-    lv<-landscape.locus(lnum,Rland)[,c(FALSE,FALSE,FALSE,rep(TRUE,(ncol(landscape.locus(lnum,Rland))-3)))];
+    lv<-landscape.locus(Rland,lnum)[,c(FALSE,FALSE,FALSE,rep(TRUE,(ncol(landscape.locus(lnum,Rland))-3)))];
     if (landscape.ploidy(Rland)[lnum]==1)
       {
         lv<-lv[-IndNum]
@@ -159,7 +159,7 @@ lociAIndex <- function(freq, curInd, curLoci, Rland)
 
 getMyAlleleIndex <- function(freq, curInd, curLoci, Rland)
   {
-    myAllele <- landscape.locus(lnum=curLoci, Rland)[curInd,c(-1,-2,-3)]
+    myAllele <- landscape.locus( Rland,lnum=curLoci)[curInd,c(-1,-2,-3)]
     if (landscape.ploidy(Rland)[curLoci] == 1)
     {
       rv <- which(as.numeric(colnames(freq))==myAllele)

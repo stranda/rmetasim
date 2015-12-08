@@ -133,7 +133,9 @@ PackedIndividual PackedIndividual::MakeGamete(AlleleLookTbl &Atbls)
 	}
       else
 	{
+#ifdef DEBUG
 	  cerr << "Fell through all of the inheritance types in MakeGamete " << endl;
+#endif
 	  assert(1==0);
 	}
       if (!(pi.G[((i * MAXPLOIDY))]>-1))
