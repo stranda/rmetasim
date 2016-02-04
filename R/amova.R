@@ -79,7 +79,7 @@ landscape.amova.pairwise.old <- function(rland)
   }
 
 
-landscape.amova <- function(rland,np=24,ns=24) #np is the sample size per population.  Only pops with actual > np
+landscape.amova <- function(rland,np=NULL,ns=NULL) #np is the sample size per population.  Only pops with actual > np
   {
     unlist(sapply(1:length(rland$loci),function(x,l){landscape.amova.locus(l,x)$statphi
                                             },l=landscape.sample(rland,np=np,ns=ns)))

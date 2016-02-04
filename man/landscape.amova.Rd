@@ -6,7 +6,7 @@
  calcuates \eqn{\phi_{ST}} for every locus in the landscape 
 }
 \usage{
-landscape.amova(rland, np = 24, ns = 24)
+landscape.amova(rland, np = NULL, ns = NULL)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
