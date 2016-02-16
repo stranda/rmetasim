@@ -4,7 +4,7 @@
 #' @param l a \code{rmetasim} landscape object.
 #' @param include.states include states?
 #'
-#'
+#' 
 landscape.ind.freq <- function(l,include.states=TRUE)
   {
     aml <- vector("list",length(landscape.ploidy(l)))
