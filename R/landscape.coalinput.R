@@ -114,6 +114,7 @@ landscape.coalinput <- function (rland, npp = 200, arlseq = NULL, arlms = NULL, 
                     ###check for all N; if so add a random sequence.  otherwise do nothing
                     clocseq <- lapply(clocseq,function(x)
                                       {
+                                          if (length(rownames(x))==1) #this is probably the same check as below
                                           if (nchar(gsub("N","",rownames(x)))==0) #check if all Ns
                                               {
                                                   rownames(x) <- paste0(sample(c("A","G","T","C"),nchar(rownames(x)),
