@@ -105,19 +105,30 @@ landscape.coalinput <- function (rland, npp = 200, arlseq = NULL, arlms = NULL, 
     if (is.null(arlseq) & is.null(arlms) & is.null(mut.rates)) {
         print("you must specify some type of coalescent input")
         rland
-    }
-    else {
-        if (!is.null(arlseq)) 
-            clocseq <- coal2rmet(arlseq)
-        else clocseq <- NULL
-        if (!is.null(clocseq)) {
-            clocseq <- clocseq[1]
-        }
-        if (!is.null(arlms)) {
-            clocms <- lapply(arlms, function(x) coal2rmet(x))
-            clocms <- do.call(c, clocms)
-        }
-        else clocms <- NULL
+    } else
+        {
+            if (!is.null(arlseq))
+                {
+                    clocseq <- coal2rmet(arlseq)
+                    ###need some logic to check for monomorphism
+                    ###check for all N; if so add a random sequence.  otherwise do nothing
+                    clocseq <- lapply(clocseq,function(x)
+                                      {
+                                          if (nchar(gsub("N","",rownames(x)))==0) #check if all Ns
+                                              {
+                                                  rownames(x) <- paste0(sample(c("A","G","T","C"),nchar(rownames(x)),
+                                                                               replace=T),collapse='')
+                                              }
+                                          x
+                                      })
+                }  else clocseq <- NULL
+            if (!is.null(clocseq)) {
+                clocseq <- clocseq[1]
+            }
+            if (!is.null(arlms)) {
+                clocms <- lapply(arlms, function(x) coal2rmet(x))
+                clocms <- do.call(c, clocms)
+            } else clocms <- NULL
         cloc <- c(clocseq, clocms)
         if (is.null(mut.rates)) {
             mut.rates = rep(NA, length(cloc))
@@ -125,7 +136,9 @@ landscape.coalinput <- function (rland, npp = 200, arlseq = NULL, arlms = NULL, 
         for (loc in 1:length(cloc)) {
             states <- as.character(rownames(cloc[[loc]]))
             attr(states, "names") <- NULL
-            ltype <- c(1, 2)[length(grep("T", states[1])) + 1]
+            
+            
+            ltype <- c(1, 2)[length(grep("T|A|G|C", states[1])) + 1] #1=ssr 2=seq
             freqs <- as.numeric(apply(as.matrix(cloc[[loc]]), 
                 1, mean))
             attr(freqs, "names") <- NULL
@@ -137,8 +150,7 @@ landscape.coalinput <- function (rland, npp = 200, arlseq = NULL, arlms = NULL, 
                   ploidy = 2, mutationrate = mut.rates[loc], 
                   numalleles = length(states), frequencies = freqs, 
                   states = as.numeric(states), transmission = 0)
-            }
-            else {
+            } else {
                 if (is.na(mut.rates[loc])) {
                   mut.rates[loc] <- seqsitemut
                 }
