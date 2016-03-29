@@ -38,7 +38,7 @@
 }
 
 \seealso{
-  landscape.ind.freq
+  landscape.ind.freq, landscape.make.genind
   }
 
 \examples{

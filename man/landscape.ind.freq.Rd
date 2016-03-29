@@ -41,7 +41,7 @@
 }
 
 \seealso{
-  landscape.freq.locnames
+  landscape.freq.locnames, landscape.make.genind
   }
 
 \examples{
