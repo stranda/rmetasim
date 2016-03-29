@@ -1,9 +1,9 @@
 Package: rmetasim
-Version: 3.0.1
+Version: 3.0.2
 Author: Allan Strand <stranda@cofc.edu>, 
 	James Niehaus
 Maintainer: Allan Strand <stranda@cofc.edu>
-Date: 2015-12-09
+Date: 2016-3-28
 Imports: pegas,
 	 ade4,
 	 gtools,
@@ -19,8 +19,8 @@ Description: An interface between R and the metasim simulation engine.
     The current version has eliminated the backend encoded output routines.
     These routines were accessed using "landscape.write.foreign".  Now only
     output to GenePop files remains.  
-    R based routines for population data analysis have improved dramatically 
-    and many can use the 'genind' format used in the adegenet package. 
+    R based routines for population genetic data analysis have improved dramatically 
+    and many can use the 'genind' format defined by the adegenet package. 
     There is now a new function called "landscape.make.genind" which converts
     a landscape to a genind object.  Please contact the maintainer if other
     output formats are needed.
