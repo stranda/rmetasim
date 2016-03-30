@@ -20,5 +20,5 @@ Description: An interface between R and the metasim simulation engine.
     CreatingLandscapes and Simulating to get some ideas on how to use the packages.  
     See the rmetasim vignette to get an overview and to see important changes to the 
     code in the most recent version.
-VignetteBuilder: R.rsp
+VignetteBuilder: knitr
 Packaged: Fri Dec 15 21:56:15 2006; astrand
