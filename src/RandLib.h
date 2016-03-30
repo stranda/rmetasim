@@ -76,7 +76,7 @@ UTILITY INLINE USED IN SEVERAL FUNCTIONS
 
 Implements a random number generator that STL:random_shuffle can use
 */
-inline int randWrapper(const int n) { return floor(RandLibObj.unirange(n)); }
+inline int randWrapper(const int n) { return RandLibObj.unirange(n); }
 
 
 #endif /*RANDLIB*/

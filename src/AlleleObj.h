@@ -152,7 +152,7 @@ public:
   ///set a site to a state
   ///defaults to first site
  
-  void SetSite (char state, int sn = 0);
+  void SetSite (char st, int sn = 0);
 
   /** RandomSeq expects the proportions of the bases in a random
   sequence.  They must add to 1.0 (defaults to 0.25,0.25,0.25,0.25

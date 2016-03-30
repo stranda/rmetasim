@@ -78,9 +78,9 @@ int SeqAllele::SeqLen()
   return dnaseq.size();
 }
 
-void SeqAllele::SetSite(char state, int sn)
+void SeqAllele::SetSite(char st, int sn)//st is the state, sn is the position
 {
-  dnaseq[sn]=state;
+  dnaseq[sn]=st;
 }
 
 void SeqAllele::RandomSeq(double a, double c, double t, double g)
