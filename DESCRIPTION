@@ -9,7 +9,9 @@ Imports: pegas,
 	 gtools,
 	 adegenet
 Suggests: magrittr,
-          R.rsp
+	  knitr,
+	  ggplot2,
+	  reshape2	  
 Title: An Individual-Based Population Genetic Simulation Environment
 License: GPL
 Description: An interface between R and the metasim simulation engine.

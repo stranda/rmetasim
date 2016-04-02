@@ -1,30 +1,19 @@
-% /home/astrand/GoogleDrive/src/rmetasim.vignettes/rmetasim/rmetasim.tex
-% $Modified:  Wed Mar 30 09:01:43 EDT 2016$
-
-% /usr/local/skel/LaTeX.tex
-% $Modified: Sat Mar 13 13:59:32 1999 by astrand $
-
-%\VignetteIndexEntry{rmetasim overview}
-%\VignetteEngine{knitr}
-
-
-\documentclass[12pt]{article}
-
-%modify the following file to include more lecture-specific stuff
-\input{/usr/local/share/texmf/tex/latex/local/handout-new.tex}
-
-\begin{document}
-\newlength{\fullwidth}
-\setlength{\fullwidth}{\imagewid}
-
-
-\section*{rmetasim}
+---
+title: "rmetasim overview"
+author: "A Strand"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Introduction to rmetasim}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
 
 This package simulates individual-based population genetic data in
 forward time. 
 
 
-\subsection*{demography}
+#demography
 
 
 In particular, it implements a set of functions that allow for a
@@ -35,17 +24,17 @@ addition, the within population demography can be simple to
 arbitrarily complex, the latter often needed when simulating complex
 management scenarios.
 
-\subsection*{genetics}
+#genetics
 
 Genetics in rmetasim allows large numbers of unlinked loci that evolve
 either through infinite allele or stepwise mutation models.  In
 addition, sequence evolution is possible and as a consequence SNPs
 
-\subsection*{Notes for the newest version (3.*.*)}
+#Notes for the newest version, 3
 Version 3 of rmetasim implemented some significant changes to improve
 code quality and hopefully, usability.
-\begin{itemize}
-\item The current version has eliminated the backend encoded output
+
+  * The current version has eliminated the backend encoded output
   routines.  These routines were accessed using
   "landscape.write.foreign".  Now only output to GenePop files
   remains.  R based routines for population genetic data analysis are
@@ -55,7 +44,7 @@ code quality and hopefully, usability.
   object.  Please contact the maintainer about adding additional
   output formats.
 
-\item Several functions (landscape.amova.locus, landscape.locus,
+  * Several functions (landscape.amova.locus, landscape.locus,
   landscape.locus.states, landscape.mismatchdist, landscape.states)
   that access genetic information from landscapes had a strange order
   for parameters.  That has been resolved to be the same as the rest
@@ -63,27 +52,4 @@ code quality and hopefully, usability.
   code that uses these and is based on rmetasim v<3.0, you will need
   to rearrange the parameters for these function calls, unless
   parameters were explicitly named in the calls.
-
   One consequence of this change is that 'magrittr'-style pipes work with rmetasim now (see the CreatingLandscapes vignette for some examples).  
-\end{itemize}
-
-
-
-
-
-%
-%
-%
-% Local Variables: 
-% TeX-master: "rmetasim"
-% End:
-
-
-
-\newpage
-\bibliographystyle{dcu}
-\bibliography{allrefs,journals-abbrv,states}
-\newpage
-
-\end{document}
-
