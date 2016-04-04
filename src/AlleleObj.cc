@@ -73,7 +73,7 @@ SeqAllele::~SeqAllele()
 }
 
 
-int SeqAllele::SeqLen()
+size_t SeqAllele::SeqLen()
 {
   return dnaseq.size();
 }
@@ -85,9 +85,9 @@ void SeqAllele::SetSite(char st, int sn)//st is the state, sn is the position
 
 void SeqAllele::RandomSeq(double a, double c, double t, double g)
 {
-  int numa, numc, numt, numg, i, sl;
+  int numa, numc, numt, numg, i;
   double bc;
-  
+  size_t sl;
   sl = SeqLen();
   i = 0;
 
@@ -144,7 +144,7 @@ void SeqAllele::mutate()
 {
   double uni;
   char s1, s2, s3;
-
+  size_t sl = SeqLen();
   if (state=='A')
     {
       s1 = 'G';
@@ -173,21 +173,21 @@ void SeqAllele::mutate()
   uni = RandLibObj.uniform() ; 
   if (uni < 0.33333)
     {
-      dnaseq[RandLibObj.unirange(SeqLen())] = s1;
+      dnaseq[RandLibObj.unirange(sl)] = s1;
     }
   else if (uni < 0.666667)
     {
-      dnaseq[RandLibObj.unirange(SeqLen())] = s2;
+      dnaseq[RandLibObj.unirange(sl)] = s2;
     }
   else 
     {
-      dnaseq[RandLibObj.unirange(SeqLen())] = s3;
+      dnaseq[RandLibObj.unirange(sl)] = s3;
     }
 }
 
 bool SeqAllele::Compare(SeqAllele obj) {
  
-   int i;
+   size_t i;
    if (SeqLen() == obj.SeqLen()) 
       {
 	for( i=0; i<SeqLen(); i++)
@@ -205,7 +205,7 @@ bool SeqAllele::Compare(SeqAllele obj) {
 void SeqAllele::WriteState(ostream & stream)
 {
   char sob;
-  for (int i=0; i<SeqLen();++i)
+  for (size_t i=0; i<SeqLen();++i)
     {
       sob = GetSite(i);
       stream << sob;
@@ -217,7 +217,7 @@ void SeqAllele::Write(ostream & stream)
   char sob;
 
   stream << prop <<"  "<< birth <<" ";
-  for (int i=0; i<SeqLen();++i)
+  for (size_t i=0; i<SeqLen();++i)
     {
       sob = GetSite(i);
       stream << sob;
@@ -227,7 +227,7 @@ void SeqAllele::Write(ostream & stream)
 
 void SeqAllele::Scan(istream & stream)
 {
-  int i;
+  size_t i;
   char tmp;
   string alist = "agtcAGTC"; 
   stream >> prop >> birth ;

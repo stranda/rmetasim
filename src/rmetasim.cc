@@ -186,7 +186,8 @@ void R_to_metasim_loci(SEXP inlist, Landscape_statistics& L)
     
     const char *ststr;
     ststr = NULL;
-    int andx,i=0,j=0,sl=0;
+    int andx,i=0,sl=0;
+    size_t j =0;
     int nloc = length(inlist);///number of loci
     int l =0;
     int ltype;
@@ -250,8 +251,8 @@ void R_to_metasim_loci(SEXP inlist, Landscape_statistics& L)
 		//	        strstr = CHAR(getListElement(na,STATENAME));
 		ststr = CHAR(asChar(getListElement(na,STATENAME)));
 		sl = strlen(ststr);
-		assert(sl<=MAXSEQLEN);
-		assert(sl>0);
+		//		assert(sl<=MAXSEQLEN);
+		//		assert(sl>0);
 		
 		SeqAllele als(sl);
 		als.SetBirth(INTEGER(coerceVector(getListElement(na,ABIRTHNAME),INTSXP))[0]);

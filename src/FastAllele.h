@@ -85,7 +85,7 @@ public:
   virtual void KillAlleleCopy(int i, int t)=0;
   virtual void CalcProps()=0;
   virtual void clear()=0;
-  virtual void setSeqLen(int sl)=0;
+  virtual void setSeqLen(size_t sl)=0;
 
 };  // end AlleleTbl
 
@@ -233,7 +233,7 @@ public:
 
   int mutator(int anum, int t);  
 
-  inline void setSeqLen(int sl)
+  inline void setSeqLen(size_t sl)
   {
     sl++;  ///doesn't do anything for this class, defined as virtual in parent.
   }

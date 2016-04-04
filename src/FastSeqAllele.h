@@ -147,7 +147,7 @@ public:
 
   int mutator(int anum, int t);  
 
-  inline void setSeqLen(int sl)
+  inline void setSeqLen(size_t sl)
   {
     seqlen = sl;
   }

@@ -133,7 +133,7 @@ public:
   void mutate ();
 
   ///returns length of sequence
-  int SeqLen () ;                       
+  size_t SeqLen () ;                       
  
 
   inline void SetState (SequenceType seq)
