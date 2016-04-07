@@ -4,7 +4,7 @@ author: "A Strand"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Setting up simulations}
+  %\VignetteIndexEntry{Running simulations}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -18,7 +18,7 @@ it usually means ``hard to use''.  rmetasim has proven to be a bit
 impenetrable to users starting off so, empirically, this software fits
 into that category.  This vignette is an attempt to explain some of
 the approaches to simulation that rmetasim can help implement, and
-lower the activation energy associated with its use.
+lower the activation energy required for its use.
 
 ##Alternatives to landscape.simulate()
 
@@ -48,7 +48,7 @@ rland <- landscape.simulate(rland,10)
 landscape.amova(rland)
 ```
 
-Here is the same simulation with the individual steps implemented in R functions
+Here is the same simulation with the individual steps implemented in R functions (which call corresponding C++ functions)
 ```{r}
 rland <- landscape.new.example()
 for (gen in 1:10)
@@ -156,11 +156,11 @@ pl
 
 ###Replicating this "experiment"
 
-The graph in the previous section is interesting.  Does it hold up
-over multiple replicates? The following code replicates the previous
-experiment 3 times, a more useful number of replicates for
-understanding these time-series would be around 50.  The data are then
-plotted like before.
+The graph in the previous section may be a little bit interesting.
+Does it hold up over multiple replicates? The following code
+replicates the previous experiment 3 times, a more useful number of
+replicates for understanding these time-series would be much higher
+(30? 100?).  The data are then plotted like before.
 
 The starting point is the same landscape creation function in the previous section.
 
