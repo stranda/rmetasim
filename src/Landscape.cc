@@ -1154,7 +1154,7 @@ void Landscape::LambdaAdjust(int bypop)
 	      adjrate = pred_l/sim_l;
 	      for (l=(i*s);l<((i*s)+s);l++)
 		{
-		  CarryState(int(round(double(I[l].size())*adjrate)),l);
+		  CarryState((int)(I[l].size()*adjrate+0.5),l);
 		}
 	    }
 	}
@@ -1167,7 +1167,7 @@ void Landscape::LambdaAdjust(int bypop)
 	  
 	  for (i=0;i<(s*nhab);i++)
 	    {
-	      CarryState(int(round(double(I[i].size())*adjrate)),i);
+	      CarryState((int)(I[l].size()*adjrate+0.5),l);
 	    }
 	}
     } //if bypop is ne 0;
