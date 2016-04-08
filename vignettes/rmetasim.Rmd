@@ -12,9 +12,7 @@ vignette: >
 This package simulates individual-based population genetic data in
 forward time. 
 
-
 #demography
-
 
 In particular, it implements a set of functions that allow for a
 diverse set of demographies. These demographic conditions can change
