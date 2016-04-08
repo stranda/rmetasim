@@ -37,7 +37,7 @@ code quality and hopefully, usability.
   * rmetasim is also available from github
     (https://github.com/stranda/rmetasim).  If you want the latest
     version, install and load the 'devtools' package in your R session and then
-	use "install_github("stranda/rmetasim"). 
+	use "install_github("stranda/rmetasim").  On Windows, you will have to install Rtools first. 
   * The current version has eliminated the backend encoded output
   routines.  These routines were accessed using
   "landscape.write.foreign".  Now only output to GenePop files
