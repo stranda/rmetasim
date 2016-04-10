@@ -1617,7 +1617,7 @@ Landscape_statistics::~Landscape_statistics ()
 #endif
 
 }
-
+/*****
 void Landscape_statistics::Statistics(ostream & streamout)
 {
 
@@ -1632,7 +1632,7 @@ void Landscape_statistics::Statistics(ostream & streamout)
     }
   streamout <<"  "<< PopSize(-1) <<"  "<<endl;;
 }
-
+*****/
 
 double Landscape_statistics::GenLength()
 {

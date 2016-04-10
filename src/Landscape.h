@@ -750,7 +750,7 @@ Landscape_statistics (int h=1, int stg=2, int loc=1, int ep=1, int gn=2);
       run-time choice...
 
 */
-void Statistics(ostream &streamout = cout);
+  //void Statistics(ostream &streamout = cout);
 
   //Demographic Stats
   /**

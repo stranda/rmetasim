@@ -125,12 +125,12 @@ public:
       G[ ((l * MAXPLOIDY) + a) ] = al;
     }
 
-
+  /*
   inline void WriteState(int l, int a, AlleleLookTbl &Atbls, ostream & stream = cout)
     {
       Atbls[l]->WriteAlleleState(G [ ((l * MAXPLOIDY) + a) ], stream );
     }
-
+  */
 
   inline void swap_allele(int l)
     {
