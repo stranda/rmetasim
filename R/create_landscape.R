@@ -213,7 +213,7 @@ landscape.new.local.demo <- function(rland,S,R,M,k=0)
 
 landscape.new.epoch <- function(rland,S=NULL,R=NULL,M=NULL,epochprob=1,startgen=0,extinct=NULL,carry=NULL,localprob=NULL)
 {
-  if (is.null(rland$demography$epochs))
+  if (length(rland$demography$epochs) == 0)
     {
       rland$demography$epochs <- list(NULL)
       epochnum <- 1
