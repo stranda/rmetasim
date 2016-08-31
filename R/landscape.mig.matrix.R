@@ -19,7 +19,7 @@ landscape.mig.matrix <- function(h=3,               #habitats
     if(mig.model=="island")
       {
         R.int <- matrix(0,nrow=h,ncol=h)
-        R.comb <- combinations(h,s,1:h)[h:1,] #from gtools.  Could try a hand-written one to reduce depend
+        R.comb <- gtools::combinations(h,s,1:h)[h:1,] #from gtools.  Could try a hand-written one to reduce depend
         for(a in 1:h)
           {
             R.int[R.comb[a,],a] <- 1          
