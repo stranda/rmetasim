@@ -1,5 +1,8 @@
+
 You can always use "install_github("stranda/rmetasim") to get the most up to date copy of rmetasim.
 	
+ver 3.0.7
+	Added in a test for adding more than the maximum allowed loci
 ver 3.0.6 
 	The versions between this and 3.0.1 updated the vignette system and vignette content.  
 	It also implemented a bunch of fixes for solaris compilation issues.
