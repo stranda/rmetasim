@@ -1187,6 +1187,11 @@ SEXP l2w(SEXP Rland, SEXP numind)
     return ScalarInteger(NONGENOTYPECOLS);
   }
 
+  SEXP num_loci_poss()
+  {
+     return ScalarInteger(MAXLOCI);
+  }
+
   SEXP test(SEXP mat1, SEXP mat2)
   {
     TransMat t1,t2,t4;

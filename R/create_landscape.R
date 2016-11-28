@@ -330,6 +330,8 @@ landscape.new.locus <- function (rland, type = 0, ploidy = 1, mutationrate = 0, 
     }
     else {
         locusnum <- length(rland$loci) + 1
+        if (landscape.maxloci()<locusnum)
+           stop(paste0("Trying to create more loci(",locusnum,")than currently allowed by rmetasim:(",landscape.maxloci(),")\nTo fix either: reduce number of loci\nor change the constant MAXLOCI in 'src/const.h' to a value slightly greater than\n\tyou need and recompile rmetasim.  If recompiling is a problem, please contact author"))
         rland$loci[[locusnum]] <- list(type = 0, ploidy = 0, 
             rate = 0, trans = 0, alleles = 0)
     }
@@ -458,4 +460,14 @@ landscape.new.individuals <- function(rland, PopulationSizes)
 landscape.democol <- function()
   {
     as.integer(.Call("num_demo_cols",PACKAGE="rmetasim"))
+  }
+
+
+#
+# a convenience function that provides the highest number of loci possible (value of MAXLOCI in 'const.h')column number for demographic information in
+# the individuals matrix
+#
+landscape.maxloci <- function()
+  {
+    as.integer(.Call("num_loci_poss",PACKAGE="rmetasim"))
   }

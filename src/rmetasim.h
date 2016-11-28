@@ -109,6 +109,10 @@ extern "C" SEXP num_demo_cols();
 ///convert a landscape into a format that the weir fst calculations in R can use.
 extern "C" SEXP l2w(SEXP Rland, SEXP numind);
 
+///return the maximum loci compiled into this version of rmetasim
+extern "C" SEXP num_loci_poss();
+
+
 ///
 ///this is C code to calculate relatedness
 ///
