@@ -19,14 +19,14 @@ landscape.ind.freq <- function(Rland,include.states=TRUE)
                   genos <- unname(lst$state[as.character(genos)])
               }
           }
-          amat <- sapply(as.numeric(names(table(genos))),function(x,genos,pl)
+          amat <- sapply(names(table(genos)),function(x,genos,pl)
           {
               if (pl==2)
               {
-                  (genos[,1]==x)+(genos[,2]==x)
+                  (as.character(genos[,1])==as.character(x))+(as.character(genos[,2])==as.character(x))
               } else
               {
-                  genos==x
+                  as.character(genos)==as.character(x)
               }
           },genos=genos,pl=ploidy)
           aml[[loc]] <- apply(amat,2,function(x,pl){x/pl},pl=ploidy) #allele freqs per ind
