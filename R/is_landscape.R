@@ -140,7 +140,7 @@ is.landscape <- function(Rland=NULL,verb=TRUE,exact=FALSE)
                           if ((x[2]!="char")&(!as.character(x[1]) %in% c("251","252"))) res <- TRUE
                           res
                 })
-          if (sum(mismatch)>0) {ok <- FALSE; if (verb) print("allele state type don't match the locus-level mutation model/type")}
+          if (sum(mismatch)>0) {ok <- FALSE; if (verb) print("allele state types don't match the locus-level mutation model/type")}
       }
     
 #check individuals
