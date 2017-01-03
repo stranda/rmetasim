@@ -31,7 +31,9 @@ Defines:
 #define INDPARAMS        "individuals"
 
 #define HABNAMES         "habitats"     
-#define STAGENAME 	 "stages"       
+#define STAGENAME 	 "stages"
+#define XDIMNAME 	 "xdim"
+#define YDIMNAME 	 "ydim"       
 #define	LNUMNAME	 "locusnum"     
 #define	ENUMNAME	 "numepochs"    
 #define	CGNAME		 "currentgen"   

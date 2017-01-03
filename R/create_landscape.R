@@ -68,20 +68,13 @@ landscape.new.example <- function()
 # these routines set up the list of intparams with some sort of reasonable defaults
 # the first within a landscape, the second independantly
 
-landscape.new.intparam <- function(rland,h=1,s=1,cg=0,ce=0,totgen=1000,maxland=200000)
+landscape.new.intparam <- function(rland,h=1,s=1,cg=0,ce=0,totgen=1000,maxland=200000,xdim=0,ydim=0)
 {
-  rland$intparam <- list(h,s,0,0,cg,ce,totgen,0,maxland)
-  names(rland$intparam) <- c("habitats","stages","locusnum","numepochs","currentgen","currentepoch","totalgens","numdemos","maxlandsize")
+  rland$intparam <- list(h,s,0,0,cg,ce,totgen,0,maxland,xdim,ydim)
+  names(rland$intparam) <- c("habitats","stages","locusnum","numepochs","currentgen","currentepoch","totalgens","numdemos","maxlandsize","xdim","ydim")
   rland
 }
   
-#new.intparam <- function(h=1,s=2,l=1,ne=1,cg=0,ce=0,totgen=1,nd=1,maxland=200000)
-#{
-#  rl <- list(h,s,l,ne,cg,ce,totgen,nd,maxland)
-#  names(rl) <- c("habitats","stages","locusnum","numepochs","currentgen","currentepoch","totalgens","numdemos","maxlandsize")
-#  rl
-#}
-
 
 #
 # these routines set up the list of floatparams with some sort of reasonable defaults

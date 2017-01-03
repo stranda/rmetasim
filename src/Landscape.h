@@ -191,6 +191,12 @@ protected:
   /// number of genetic loci
   int nloc;
 
+  /// number of populations in X-dimension
+  int xdim;
+
+  /// number of populations in Y-dimension
+  int ydim;
+  
   /// selfing rate
   double self;
 
@@ -320,6 +326,9 @@ public:
          void setndemo(int nd=1);
          void sethabs(int h=1);
          void setstages(int stg=2);
+  void setxdim(int x=0);
+  void setydim(int y=0);
+         
   inline void setnextID(int newid=1) {nextID=newid;}
   inline void setloci() {nloc=Atbls.size();}
          void setepochprob(int ce, double prob);
@@ -332,6 +341,8 @@ public:
 
   inline int gethabs() {return nhab;}
   inline int getstages() {return s;}
+    inline int getxdim() {return xdim;}
+    inline int getydim() {return ydim;}
   inline double getself() {return self;}
   inline int getmultp() {return multiple_paternity;}
   inline int getloci() {setloci(); return nloc;}

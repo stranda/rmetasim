@@ -206,6 +206,8 @@ void Landscape::sethabs(int h)
 }
 
 void Landscape::setstages(int stg) { s=stg; }
+void Landscape::setxdim(int x) { xdim=x; }
+void Landscape::setydim(int y) { ydim=y; }
 void Landscape::setepochprob(int ce, double prob) {epochprobs[ce]=prob;}
 void Landscape::setepochstart(int ce, int strt) {epochs[ce]=strt;}
 
@@ -221,6 +223,14 @@ void Landscape::init(int h, int stg, int /*loc*/, int ep, int nd, int gn)
   cerr << "Running: setstages(stg)" <<endl;
 #endif
   setstages(stg);
+#ifdef DEBUG
+  cerr << "Running: setxdim()" <<endl;
+#endif
+  setxdim();
+#ifdef DEBUG
+  cerr << "Running: setydim()" <<endl;
+#endif
+  setydim();
 #ifdef DEBUG
   cerr << "Running: setepochs(ep)" <<endl;
 #endif
