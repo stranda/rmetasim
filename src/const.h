@@ -30,7 +30,7 @@ Largest random number possible given the stdlib random number generator
 #define HABDELTA              0.01
 #define RANDOMSTATE           100
 #define MAXSTAGES             500
-#define MAXLOCI               200
+#define MAXLOCI               2000
 #define MAXALLELES            2000
 #define MAXPLOIDY             2
 #define MAXSEQLEN             1000
