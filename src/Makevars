@@ -3,8 +3,10 @@
 #PKG_CFLAGS =   -I. -O3 -Wall -pedantic
 #PKG_CXXFLAGS = -I. -O3 -Wall  -pedantic
 
+CC=clang-4.0
+CXX=clang-4.0
 
-PKG_CXXFLAGS = -I. -g 
-PKG_CFLAGS =   -I. -g 
+PKG_CXXFLAGS = -I. -L/usr/lib/x86_64-linux-gnu -lc++abi
+PKG_CFLAGS =   -I.  
 
 PKG_LIBS =  ${FLIBS} ${LAPACK_LIBS} ${BLAS_LIBS} ${LIBM}
