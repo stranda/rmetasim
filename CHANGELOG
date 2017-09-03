@@ -1,5 +1,8 @@
 
 You can always use "install_github("stranda/rmetasim") to get the most up to date copy of rmetasim.
+	ver 3.1.1
+	dealt with issues with compining on clang-4.  Also registered native calls.  Made the rudimentary space stuff interface acceptable to CRAN
+
 	ver 3.1.0
 Added rudimentary space.  Basically x and y dimensions in the intparam component of the landscape object
 	ver 3.0.8

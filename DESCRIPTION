@@ -3,7 +3,7 @@ Version: 3.1.1
 Author: Allan Strand <stranda@cofc.edu>, 
 	James Niehaus
 Maintainer: Allan Strand <stranda@cofc.edu>
-Date: 2017-8-28
+Date: 2017-9-3
 Imports: pegas,
 	 ade4,
 	 gtools,

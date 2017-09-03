@@ -12,6 +12,14 @@ Allan Strand 9/17/01
 
 ///extern "C" {
 
+//Init defined for registering
+
+void R_init_rmetasim(DllInfo *dll)
+{
+    R_registerRoutines(dll, NULL, CallEntries, NULL, NULL);
+    R_useDynamicSymbols(dll, FALSE);
+}
+
   /* get the list element named str, or return NULL */
   /*This code comes from the R-exts documentation */
  
