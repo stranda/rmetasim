@@ -1,5 +1,7 @@
 
 You can always use "install_github("stranda/rmetasim") to get the most up to date copy of rmetasim.
+	ver 3.1.2
+	found and fixed a memory leak in the sequence mutation routines
 	ver 3.1.1
 	dealt with issues with compining on clang-4.  Also registered native calls.  Made the rudimentary space stuff interface acceptable to CRAN
 

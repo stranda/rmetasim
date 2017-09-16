@@ -42,7 +42,7 @@ UTILITY MACROS
 ///#define RDEBUG
 ///#define DEBUG
 
-
+//// #define ROUND_2_INT(f) ((int)(f >= 0.0 ? (f + 0.5) : (f - 0.5))) 
 #define HAVE_LAPACK
 
 #endif /*METASIM_H*/

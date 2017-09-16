@@ -28,13 +28,13 @@ DemoClass::~DemoClass ()
 ///add an individual to the data structure.  Returns the index to the individual.
 ///this method also adds the alleles to the allele table for each locus.  This maintains the allele
 ///frequency tables.
-int DemoClass::AddIndividual (PackedIndividual & PI)
+int DemoClass::AddIndividual (PackedIndividual & PkInd)
 {
   int i;
   i = -1;
   if (UNUSED.empty())
     {
-      I[maxind]=PI;
+      I[maxind]=PkInd;
       i=maxind;
       maxind++;
     } //end     "if UNUSED is empty"
@@ -42,7 +42,7 @@ int DemoClass::AddIndividual (PackedIndividual & PI)
     {
       i = UNUSED.back();
       UNUSED.pop_back();
-      I[i]=PI;
+      I[i]=PkInd;
     }
   return i;
 }

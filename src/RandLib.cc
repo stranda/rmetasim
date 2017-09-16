@@ -130,8 +130,10 @@ int RandLib::unirange(int maxval)
   uni = runif(0.0,maxval);
   //  cerr << "uni "<<uni<<endl;
   //  rv=int(round(runif(0.0,maxval)));
-  rv=int(fround(uni,0));
-  return rv;
+  //rv=int(fround(uni,0));
+  
+  //return rv;
+  return (int)(uni+0.5);
 }
 
 
