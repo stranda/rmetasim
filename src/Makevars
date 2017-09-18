@@ -1,10 +1,6 @@
 
-######the following flags are gcc specific uncomment if you are using a gcc compiler for more performance
-#PKG_CFLAGS =   -I. -O3 -Wall -pedantic
-#PKG_CXXFLAGS = -I. -O3 -Wall  -pedantic
-
-CC=clang-4.0
-CXX=clang-4.0
+#CC=clang-4.0
+#CXX=clang-4.0
 
 PKG_CXXFLAGS = -I. 
 PKG_CFLAGS =   -I.  
