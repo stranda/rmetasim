@@ -1139,7 +1139,7 @@ void Landscape::HabCarry(int k)
 
 void Landscape::LambdaAdjust(int bypop)
 {
-  int i, j, k, l, bigto, bigfrom;
+  int i, j, k, l = 0, bigto, bigfrom;
   double pred_l, sim_l, adjrate;
   TransMat diag, Spopmat, Rpopmat;
   if (bypop)
