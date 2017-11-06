@@ -4,7 +4,7 @@ Author: Allan Strand <stranda@cofc.edu>,
 	James Niehaus
 Maintainer: Allan Strand <stranda@cofc.edu>
 Date: 2017-9-3
-Depends: R (>=3.4.0)
+Depends: R (>= 3.4.0)
 Imports: pegas,
 	 ade4,
 	 gtools,
