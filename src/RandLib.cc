@@ -125,7 +125,6 @@ int RandLib::multinomial(double *p, int ncat)
 ///this function should return numbers from the range inclusive  of the endpoints
 int RandLib::unirange(int maxval)
 {
-  int rv;
   double uni;
   uni = runif(0.0,maxval);
   //  cerr << "uni "<<uni<<endl;
