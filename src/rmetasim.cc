@@ -268,7 +268,7 @@ void R_to_metasim_loci(SEXP inlist, Landscape_statistics& L)
 		als.SetBirth(INTEGER(coerceVector(getListElement(na,ABIRTHNAME),INTSXP))[0]);
 		als.SetProp(REAL(coerceVector(getListElement(na,PROPNAME),REALSXP))[0]);
 		
-		for (j=0;j<sl;j++)
+		for (j=0;j<(unsigned int)sl;j++)
 		  {
 		    als.SetSite(ststr[j],j);
 		  }
