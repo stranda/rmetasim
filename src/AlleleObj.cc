@@ -95,7 +95,7 @@ void SeqAllele::RandomSeq(double a, double c, double t, double g)
     {
       g = 1.0 - (a+c+t) ; // if the sum of the other bases are less than one, set g = 1 - sum of others
       numa = 0; numc = 0; numt = 0; numg = 0;
-      while (i<sl)
+      while ((unsigned int)i<sl)
 	{
 	  bc = RandLibObj.uniform();
 	  //	  if (a!=0.0 && (double(numa)/double(sl))<=a) 
