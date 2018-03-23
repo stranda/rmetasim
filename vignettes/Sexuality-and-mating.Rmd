@@ -52,14 +52,14 @@ LocalS = matrix(c(0, 0, 0, 0,
                   0, 0, 0.6, 0.85),byrow=T,ncol=4)
 
 LocalR = matrix(c(0, 0, 0, 0.5,
-                  0,  0, 0, 0,
+                  0, 0, 0, 0,
                   0, 0, 0, 0.5,
                   0, 0, 0, 0),byrow=T,ncol=4)
 
 LocalM = matrix(c(0, 0, 0, 0,
-                  0,  0, 0, 1,
                   0, 0, 0, 0,
-                  0, 0, 0, 0),byrow=T,ncol=4)
+                  0, 0, 0, 0,
+                  0, 1, 0, 0),byrow=T,ncol=4)
 
 print("LocalS:")
 LocalS
