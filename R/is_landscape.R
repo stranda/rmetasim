@@ -79,7 +79,7 @@ is.landscape <- function(Rland=NULL,verb=TRUE,exact=FALSE)
                 ok <- FALSE
               }
             
-            if (max(apply(Rland$demography$localdem[[i]]$LocalS,2,sum))>1)
+            if (max(apply(Rland$demography$localdem[[i]]$LocalS,2,sum))>=1)
               {
                 if (verb) {print(paste("Local survival matrix",i,"has a column that sums to a number greater than one"))}
                 ok <- FALSE

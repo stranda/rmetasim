@@ -1,4 +1,5 @@
-
+	Changed the test for surv matrix norm 12/17/18
+	
 You can always use "install_github("stranda/rmetasim") to get the most up to date copy of rmetasim.
 	ver 3.1.2
 	found and fixed a memory leak in the sequence mutation routines
