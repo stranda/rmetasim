@@ -1,9 +1,9 @@
 Package: rmetasim
-Version: 3.1.8
+Version: 3.1.9
 Author: Allan Strand <stranda@cofc.edu>, 
 	James Niehaus
 Maintainer: Allan Strand <stranda@cofc.edu>
-Date: 2018-2-15
+Date: 2019-05-06
 Depends: R (>= 3.4.0)
 Imports: pegas,
 	 ade4,
