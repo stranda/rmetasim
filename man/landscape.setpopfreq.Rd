@@ -44,7 +44,7 @@ landscape.setpopfreq(rland,af=NULL,states=TRUE)
   }
 
 \examples{
-  exampleland <- landscape.new.empty()
+  exampleland <- landscape.new.example()
   af <- list('1'=list('1'=c('1'=0.5,'2'=0.25,'5'=0.25),   #population 1 locus 1 
                       '2'=c('1'=0.5,'2'=0.25,'3'=0.25)),  #population 1 locus 2
              '2'=list('1'=c('3'=0.5,'2'=0.35,'5'=0.15),   #population 2 locus 1
