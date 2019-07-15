@@ -56,9 +56,9 @@ landscape.locusvec<- function(Rland)
 #
 #takes a locus and returns the states and their indices
 #
-landscape.locus.states<-function(Rland,lnum=1)
+landscape.locus.states<-function(Rland,lnum=1,do.check=F)
   {
-    if (is.landscape(Rland))
+    if (is.landscape(Rland,do.check=do.check))
       if (lnum<=Rland$intparam$locusnum)
         {
           ain<-c();
