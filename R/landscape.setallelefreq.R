@@ -89,7 +89,7 @@ landscape.setallelefreq <- function(rland,af=NULL,states=TRUE)
 
                         if (states)
                             {
-                                ai <- landscape.locus.states(rland,as.numeric(l))
+                                ai <- landscape.locus.states(rland,as.numeric(l),do.check=F)
                                 aindex <- ai$aindex[ai$state %in% names(av)]
                             } else aindex <- names(av)
                         for (a in lcols)
