@@ -68,9 +68,9 @@ is.landscape <- function(Rland=NULL,verb=TRUE,exact=FALSE,do.check=TRUE)
                     if
                     (
                         (
-                            dim(Rland$demo$localdem[[i]]$LocalS)!=c(Rland$intparam$stages,Rland$intparam$stages) ||
-                            dim(Rland$demo$localdem[[i]]$LocalR)!=c(Rland$intparam$stages,Rland$intparam$stages) ||
-                            dim(Rland$demo$localdem[[i]]$LocalM)!=c(Rland$intparam$stages,Rland$intparam$stages)
+                            nrow(Rland$demo$localdem[[i]]$LocalS)!=c(Rland$intparam$stages) ||
+                            nrow(Rland$demo$localdem[[i]]$LocalR)!=c(Rland$intparam$stages) ||
+                            nrow(Rland$demo$localdem[[i]]$LocalM)!=c(Rland$intparam$stages) 
                         )
                     )
                     {

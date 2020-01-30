@@ -1,3 +1,7 @@
+	Updated 2 functions to bring rmetasim into R 4.0 compliance
+	
+	Added an option to skip is.landscape check on some locus functions.
+	
 	Added in functions for allele frequency specification in populations and stages.
 	Changed the test for surv matrix norm 12/17/18
 	

@@ -39,7 +39,7 @@
 \examples{
   ## Needs write access to the current directory, files created!!
   exampleland <- landscape.new.example()
-  landscape.write.foreign(exampleland, fn="exampleland.genepop", fmt="genepop")
+  ##landscape.write.foreign(exampleland, fn="exampleland.genepop", fmt="genepop")
   rm(exampleland)
 }
 \keyword{misc}
