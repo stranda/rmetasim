@@ -5,7 +5,7 @@
 \description{
   Simulate a Rmetasim landscape for a number of generations.}
 \usage{
-   landscape.simulate(Rland,numit,seed=-1,compress=FALSE,adj.lambda=0)
+   landscape.simulate(Rland,numit,seed=-1,compress=FALSE,adj.lambda=0, force=FALSE)
 }
 \arguments{
   \item{Rland}{the Rmetasim landscape object}
@@ -24,6 +24,9 @@
   that makes the observed growth rate more closely approximate that
   predicted from standard analysis eigensystem of the sum of the survival and reproduction 
   Lefkovitch matrices}
+\item{force}{Tries to simulate a landscape even if it fails the
+  'is.landscape' test.  Do not set to TRUE unless you reall know what
+  you are doing}
 }
 
 \examples{

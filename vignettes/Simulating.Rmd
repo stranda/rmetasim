@@ -5,8 +5,10 @@ date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Running simulations}
-  %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+editor_options: 
+  chunk_output_type: console
 ---
 
 
@@ -130,28 +132,26 @@ create.land <- function()
     }
 ```
 
-Now this function is used in the experiment described above
 
 
-```{r}
+Now this function is used in the experiment described above.  We are choosing 30 individuals from each population to analyze for phiST (see the landscape.sample function calls below)
+
+The next two chunks are not run in the default package but should be able to run on any rmetasim installation.
+
+```{r,eval=FALSE}
 rland <- create.land()
-retval <- matrix(0,ncol=4,nrow=21) #store the results col1 = gen, cols2-3 PhiST
-retval[1,] <- c(0,landscape.amova(rland)) #before any evolution occurs. Both populations from same source
-for (i in 2:21)
+retval <- matrix(0,ncol=4,nrow=11) #store the results col1 = gen, cols2-3 PhiST
+retval[1,] <- c(0,landscape.amova(landscape.sample(rland,ns=30))) #before any evolution occurs. Both populations from same source
+for (i in 2:11)
     {
-        rland <- landscape.simulate(rland,5)
-        retval[i,] <- c(rland$intparam$currentgen,landscape.amova(rland)) 
+        rland <- landscape.simulate(rland,10)
+        retval[i,] <- c(rland$intparam$currentgen,landscape.amova(landscape.sample(rland,ns=30))) 
     }
 ###the rest is just plotting the matrix of PhiSTs
-###you can use any kind of graphics, of course.  using ggplot2 here.
+###you can use any kind of graphics, of course.  using lattice here.
 colnames(retval) <- c("gen","Loc1","Loc2","Loc3")
-library(ggplot2)
-library(reshape2)
-pl <- ggplot(melt(as.data.frame(retval),measure.vars=c("Loc1","Loc2","Loc3")),
-             aes(x=gen,y=value,group=variable,color=variable))
-pl <- pl + labs(y="PhiST",x="Year",color="Locus")
-pl <- pl + geom_point() + geom_smooth()
-pl
+library(lattice)
+xyplot(Loc1+Loc2+Loc3~gen, data=as.data.frame(retval), type=c("p","smooth"),auto.key=T,ylab="phiST",main="Change in phiST over time")
 ``` 
 
 ###Replicating this "experiment"
@@ -164,32 +164,31 @@ replicates for understanding these time-series would be much higher
 
 The starting point is the same landscape creation function in the previous section.
 
-```{r}
+
+Using lapply here is really useful because it parallelizes well using
+routines from the ``parallel'' package (see mclapply). 
+
+```{r,eval=FALSE}
 number.reps=3
 retlst <- lapply(1:number.reps,function(x) 
                  {
                      rland <- create.land()
-                     retval <- matrix(0,ncol=5,nrow=21) 
-                     retval[1,] <- c(0,landscape.amova(rland),x)
-                     for (i in 2:21)
+                     retval <- matrix(0,ncol=5,nrow=11) 
+                     retval[1,] <- c(0,landscape.amova(landscape.sample(rland,ns=30)),x)
+                     for (i in 2:11)
                          {
-                             rland <- landscape.simulate(rland,5)
-                             retval[i,] <- c(rland$intparam$currentgen,landscape.amova(rland),x) 
+                             rland <- landscape.simulate(rland,10)
+                             retval[i,] <- c(rland$intparam$currentgen,landscape.amova(landscape.sample(rland,ns=30)),x) 
                          }
                      colnames(retval) <- c("gen","Loc1","Loc2","Loc3","replicate")
                      retval
                  })
 retdf <- as.data.frame(do.call(rbind,retlst))
+mns = with(retdf, aggregate(cbind(Loc1=Loc1,Loc2=Loc2,Loc3=Loc3),list(gen=gen),mean))
+mns$gen=as.numeric(mns$gen)
 
-pl <- ggplot(melt(retdf,measure.vars=c("Loc1","Loc2","Loc3")),
-             aes(x=gen,y=value,group=variable,color=variable))
-pl <- pl + labs(y="PhiST",x="Year",color="Locus")
-pl <- pl + geom_point() + geom_smooth()
-pl
-
+xyplot(Loc1+Loc2+Loc3~gen,data=mns,auto.key=T,type=c("p","smooth"),ylab="phiST",main=paste("means of",number.reps,"replicates"))
+xyplot(Loc1+Loc2+Loc3~gen,data=retdf,auto.key=T,type=c("p","smooth"),ylab="phiST",main=paste(number.reps,"replicates for each locus"))
 ```
-
-Using lapply here is really useful because it parallelizes well using
-routines from the ``parallel'' package. 
 
 

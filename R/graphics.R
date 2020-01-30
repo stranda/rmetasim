@@ -10,7 +10,7 @@ popsizedist.plot.landscape <- function(Rland)
         plot(table(landscape.populations(Rland)),
                    main="Frequency distribution of population sizes",
                    xlab=c("Population"),
-                   ylab=c("Number of individuals"),
+                   ylab=c("Number of individuals")
                    )
       }
   }
@@ -23,7 +23,7 @@ stgsizedist.plot.landscape <- function(Rland)
         plot(table(Rland$individuals[,1]+1),
                    main=c("Frequency distribution of demographic stage sizes"),
                    xlab=c("Demographic stage"),
-                   ylab=c("Number of individuals"),
+                   ylab=c("Number of individuals")
              )
       }
   }

@@ -7,10 +7,18 @@ Allan Strand 9/17/01
 #include <FastSeqAllele.h>
 #include <TransMat.h>
 #include <iostream>
-#include <fstream>
+//#include <fstream>
 #include <rmetasim.h>
 
 ///extern "C" {
+
+//Init defined for registering
+
+void R_init_rmetasim(DllInfo *dll)
+{
+    R_registerRoutines(dll, NULL, CallEntries, NULL, NULL);
+    R_useDynamicSymbols(dll, FALSE);
+}
 
   /* get the list element named str, or return NULL */
   /*This code comes from the R-exts documentation */
@@ -40,6 +48,8 @@ Allan Strand 9/17/01
     L.setndemo((asInteger(getListElement(inlist,DNUMNAME   ))));
     L.setMaxLandSize((asInteger(getListElement(inlist,MAXLANDNAME))));
     L.setnextID((asInteger(getListElement(inlist,NEXTIDNAME))));
+    L.setxdim((asInteger(getListElement(inlist,XDIMNAME))));
+    L.setydim((asInteger(getListElement(inlist,YDIMNAME))));
   }
   
   void R_to_metasim_switches(SEXP inlist, Landscape_statistics &L)
@@ -258,7 +268,7 @@ void R_to_metasim_loci(SEXP inlist, Landscape_statistics& L)
 		als.SetBirth(INTEGER(coerceVector(getListElement(na,ABIRTHNAME),INTSXP))[0]);
 		als.SetProp(REAL(coerceVector(getListElement(na,PROPNAME),REALSXP))[0]);
 		
-		for (j=0;j<sl;j++)
+		for (j=0;j<(unsigned int)sl;j++)
 		  {
 		    als.SetSite(ststr[j],j);
 		  }
@@ -274,7 +284,7 @@ void R_to_metasim_loci(SEXP inlist, Landscape_statistics& L)
 	  }
 	else
 	  {
-	    error("Could not identify Locus Type: %i", INTEGER(getListElement(Locus,TYPENAME))[0]);
+	    //error("Could not identify Locus Type: %i", INTEGER(getListElement(Locus,TYPENAME))[0]);
 	  }
 
 	AT->setPloidy(INTEGER(coerceVector(getListElement(Locus,PLOIDYNAME),INTSXP))[0]);
@@ -305,7 +315,7 @@ void R_to_metasim_loci(SEXP inlist, Landscape_statistics& L)
 
     if (!isMatrix(inmat))
       {
-	error("inmat is not a matrix in R_to_metasim_ind");
+	//error("inmat is not a matrix in R_to_metasim_ind");
       }
     
     int *dims = INTEGER(coerceVector(getAttrib(inmat, R_DimSymbol), INTSXP));
@@ -323,7 +333,7 @@ void R_to_metasim_loci(SEXP inlist, Landscape_statistics& L)
       }
     if (i!=nc)
       {
-	error("converting individuals: the number and type of loci must be set before invocation");
+	//error("converting individuals: the number and type of loci must be set before invocation");
       }
 
     L.reserveclasses();
@@ -373,7 +383,7 @@ void convert_R_to_metasim(SEXP Rland, Landscape_statistics &L)
 {
     if (!isNewList(Rland))
       {
-	error( "R landscape object should be a list");
+	//error( "R landscape object should be a list");
       }
     
     R_to_metasim_ints(getListElement(Rland,INTEGERPARAMS),L);
@@ -393,7 +403,7 @@ void convert_R_to_metasim(SEXP Rland, Landscape_statistics &L)
 
 }
 
-  
+/*  
 SEXP write_landscape(SEXP fn, SEXP Rland)
   {
     Landscape_statistics L;
@@ -413,6 +423,7 @@ SEXP write_landscape(SEXP fn, SEXP Rland)
     OSTRM.close();
     return ScalarInteger(0);
   }
+*/
 
 /* 
    
@@ -423,9 +434,8 @@ read in landscapes
   SEXP metasim_to_R_ints(Landscape_statistics &L)
   {
     ///allocate the scalar values that describe the landscape to 'Slist'
-    SEXP Slistn = PROTECT(allocVector (STRSXP,10));
-    SEXP Slist = PROTECT(allocVector (VECSXP,10));
-    
+    SEXP Slistn = PROTECT(allocVector (STRSXP,12));
+    SEXP Slist = PROTECT(allocVector (VECSXP,12));
     SET_STRING_ELT(Slistn, 0, mkChar(HABNAMES    )); 
     SET_STRING_ELT(Slistn, 1, mkChar(STAGENAME   )); 
     SET_STRING_ELT(Slistn, 2, mkChar(LNUMNAME    )); 
@@ -436,6 +446,8 @@ read in landscapes
     SET_STRING_ELT(Slistn, 7, mkChar(DNUMNAME    )); 
     SET_STRING_ELT(Slistn, 8, mkChar(MAXLANDNAME ));
     SET_STRING_ELT(Slistn, 9, mkChar(NEXTIDNAME  ));
+    SET_STRING_ELT(Slistn, 10, mkChar(XDIMNAME  ));
+    SET_STRING_ELT(Slistn, 11, mkChar(YDIMNAME  ));
 
     setAttrib(Slist, R_NamesSymbol, Slistn);
     
@@ -449,6 +461,8 @@ read in landscapes
     SET_VECTOR_ELT(Slist, 7, ScalarReal(L.getndemo()));
     SET_VECTOR_ELT(Slist, 8, ScalarReal(L.getMaxLandSize()));
     SET_VECTOR_ELT(Slist, 9, ScalarReal(L.getnextID()));
+    SET_VECTOR_ELT(Slist, 10, ScalarReal(L.getxdim()));
+    SET_VECTOR_ELT(Slist, 11, ScalarReal(L.getydim()));
     UNPROTECT(2);
     return Slist;
   }
@@ -798,7 +812,7 @@ read in landscapes
 	      }
 	    else
 	      {
-		error("Could not find locus type while reading loci");
+		//error("Could not find locus type while reading loci");
 	      }
 	    SET_VECTOR_ELT(Alist,a,Allele);
 	    UNPROTECT(1);
@@ -916,7 +930,7 @@ SEXP convert_metasim_to_R(Landscape_statistics &L)
     UNPROTECT(2);
     return Retlist;
 }
-
+/*
   SEXP read_landscape(SEXP fn)
   {
     Landscape_statistics L;
@@ -949,7 +963,7 @@ SEXP convert_metasim_to_R(Landscape_statistics &L)
     
     return convert_metasim_to_R(L);
   }
-
+*/
 
 ///Random number generation depends upon seed and RNG generator defined in the
   ///calling R enviroment
@@ -1145,7 +1159,7 @@ SEXP populate_Rland(SEXP Rland, SEXP Population_sizes)
 
     if (!isNewList(Rland))
     {
-      error( "R landscape object should be a list");
+      //error( "R landscape object should be a list");
     }
     R_to_metasim_ints(getListElement(Rland,INTEGERPARAMS),L);
     R_to_metasim_switches(getListElement(Rland,SWITCHPARAMS),L);
@@ -1201,7 +1215,7 @@ SEXP l2w(SEXP Rland, SEXP numind)
     sz2 = INTEGER(coerceVector(getAttrib(mat2, R_DimSymbol), INTSXP))[0];
     if (sz1!=sz2)
       {
-	error("matrices must be of same order");
+	//error("matrices must be of same order");
 	return ScalarReal(-1);
       } else {
       t1.SetSize(sz1);

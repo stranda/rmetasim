@@ -53,7 +53,7 @@ landscape.mig.matrix <- function(h=3,               #habitats
 
        if(mig.model=="custom")
        {
-        if(class(R.custom)!="matrix"|dim(R.custom)[1]!=dim(R.custom)[2])
+        if((!inherits(R.custom,"matrix"))||dim(R.custom)[1]!=dim(R.custom)[2])
           {
           stop("there is an error in the matrix provided")
           }

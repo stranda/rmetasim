@@ -95,7 +95,7 @@ void SeqAllele::RandomSeq(double a, double c, double t, double g)
     {
       g = 1.0 - (a+c+t) ; // if the sum of the other bases are less than one, set g = 1 - sum of others
       numa = 0; numc = 0; numt = 0; numg = 0;
-      while (i<sl)
+      while ((unsigned int)i<sl)
 	{
 	  bc = RandLibObj.uniform();
 	  //	  if (a!=0.0 && (double(numa)/double(sl))<=a) 
@@ -144,7 +144,7 @@ void SeqAllele::mutate()
 {
   double uni;
   char s1, s2, s3;
-  size_t sl = SeqLen();
+  size_t sl = SeqLen(), b;
   if (state=='A')
     {
       s1 = 'G';
@@ -171,17 +171,22 @@ void SeqAllele::mutate()
     }
 
   uni = RandLibObj.uniform() ; 
+  b = RandLibObj.unirange(sl - 1);
+
+  //  Rprintf("sl is %d, ",sl);
+  //   Rprintf("b is %d ",b);
+  
   if (uni < 0.33333)
     {
-      dnaseq[RandLibObj.unirange(sl)] = s1;
+      dnaseq[b] = s1;
     }
   else if (uni < 0.666667)
     {
-      dnaseq[RandLibObj.unirange(sl)] = s2;
+      dnaseq[b] = s2;
     }
   else 
     {
-      dnaseq[RandLibObj.unirange(sl)] = s3;
+      dnaseq[b] = s3;
     }
 }
 

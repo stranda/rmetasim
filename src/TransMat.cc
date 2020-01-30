@@ -210,7 +210,7 @@ double TransMat::Lambda()
 		  left, &n, right, &n, &tmp, &lwork, &info);
 #endif
   if (info != 0)
-    error("error code %d from Lapack routine dgeev", info);
+    //error("error code %d from Lapack routine dgeev", info);
   lwork = (int) tmp;
   work = new double[lwork];
 #ifdef HAVE_LAPACK
@@ -221,7 +221,7 @@ double TransMat::Lambda()
 		  left, &n, right, &n, work, &lwork, &info);
 #endif
   if (info != 0)
-    error("error code %d from Lapack routine dgeev", info);
+    //error("error code %d from Lapack routine dgeev", info);
   
   maxval=-1000000.0;
   for (i = 0; i < n; i++)
@@ -257,7 +257,7 @@ TransMat TransMat::operator+(TransMat TM)
     }
   else
     {
-      error("Matrices of different order in addition");
+      //error("Matrices of different order in addition");
     }
   return ret;
 }
@@ -284,7 +284,7 @@ TransMat TransMat::operator*(TransMat TM)
     }
   else
     {
-      error("Matrices of different order in multiplication");
+      //error("Matrices of different order in multiplication");
     }
   return ret;
 }

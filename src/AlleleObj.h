@@ -20,6 +20,7 @@ This is the declaration of the Allele object types.
 #include <BaseObj.h>
 #include <RandLib.h>
 #include <iostream>
+#include <R.h>
 
 using namespace std;
 

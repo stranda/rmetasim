@@ -5,11 +5,12 @@
 \description{return a matrix containing genotypes for a particular locus
 }
 \usage{
-  landscape.locus(Rland, lnum=1)
+  landscape.locus(Rland, lnum=1, do.check=F)
 }
 \arguments{
   \item{lnum}{the locus to return}
   \item{Rland}{the Rmetasim landscape object}
+  \item{do.check}{flag to call 'is.landscape' on input}
 }
 
 

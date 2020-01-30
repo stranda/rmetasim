@@ -5,9 +5,9 @@
 #individual genotypes
 
 #returns a individual x ploidy matrix of aindices
-landscape.locus <- function(Rland,lnum=1)
+landscape.locus <- function(Rland,lnum=1,do.check=F)
   {
-    if(is.landscape(Rland))
+    if(is.landscape(Rland,do.check=do.check))
       if (lnum<=Rland$intparam$locusnum)
         {
           Rland$individuals[,c(rep(TRUE,landscape.democol()),landscape.locusvec(Rland)==lnum)]
@@ -56,14 +56,14 @@ landscape.locusvec<- function(Rland)
 #
 #takes a locus and returns the states and their indices
 #
-landscape.locus.states<-function(Rland,lnum=1)
+landscape.locus.states<-function(Rland,lnum=1,do.check=T)
   {
-    if (is.landscape(Rland))
+    if (is.landscape(Rland,do.check=do.check))
       if (lnum<=Rland$intparam$locusnum)
         {
           ain<-c();
           sta<-c();
-          locin <- landscape.locus(Rland,lnum)[,c(-1:-landscape.democol())]
+          locin <- landscape.locus(Rland,lnum,do.check=do.check)[,c(-1:-landscape.democol())]
 #          print(locin)
           ainds <- unique(c(locin))
 #          print(ainds)
