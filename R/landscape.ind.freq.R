@@ -3,7 +3,7 @@ landscape.ind.freq <- function(Rland,include.states=TRUE)
   {
       l <- Rland
       aml <- vector("list",length(landscape.ploidy(l)))
-      for (loc in 1:length(landscape.ploidy(l)))
+      for (loc in 1:length(aml))
       {
           genos <- landscape.locus(l,loc)[,-1:-landscape.democol()]
           ploidy <- landscape.ploidy(l)[loc]
