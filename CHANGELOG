@@ -1,3 +1,6 @@
+	ver 3.1.14
+	Fixed bugs uncovered by Eric Archer
+	ver 3.1.12
 	Updated 2 functions to bring rmetasim into R 4.0 compliance
 	
 	Added an option to skip is.landscape check on some locus functions.
