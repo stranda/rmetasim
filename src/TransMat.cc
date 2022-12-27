@@ -206,32 +206,29 @@ double TransMat::Lambda()
   wI = new double[n];
   /* ask for optimal size of work array */
   lwork = -1;
-  /*
+
 #ifdef HAVE_LAPACK
   F77_CALL(dgeev)(jobVL, jobVR, &n, xvals, &n1, wR, wI,
 		  left, &n2, right, &n3, &tmp, &lwork, &info);
 #else
-  */
+
   F77_CALL(rgeev)(jobVL, jobVR, &n, xvals, &n1, wR, wI,
 		  left, &n2, right, &n3, &tmp, &lwork, &info);
-  /*
+
 #endif
-  */
+
   if (info != 0)
     //error("error code %d from Lapack routine dgeev", info);
   lwork = (int) tmp;
   work = new double[lwork];
-  /*
 #ifdef HAVE_LAPACK
   F77_CALL(dgeev)(jobVL, jobVR, &n, xvals, &n1, wR, wI,
 		  left, &n2, right, &n3, work, &lwork, &info);
 #else
-  */
   F77_CALL(rgeev)(jobVL, jobVR, &n, xvals, &n1, wR, wI,
 		  left, &n2, right, &n3, work, &lwork, &info);
-  /*
 #endif
-  */
+  
   if (info != 0)
     //error("error code %d from Lapack routine dgeev", info);
   
