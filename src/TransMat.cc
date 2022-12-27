@@ -180,11 +180,15 @@ void TransMat::Diag()
 
 double TransMat::Lambda()
 {
-  int i,j,k, n, lwork, info;
+  int i,j,k, n, n1, n2, n3, lwork, info;
   double *work, *wR, *wI, *left, *right, *xvals, tmp, maxval;
   char jobVL[1], jobVR[1];
   
   n = int(tm.size());
+  n1 = n;
+  n2=n;
+  n3=n;
+  
   xvals = new double[n*n];
   
   k=0;
@@ -202,24 +206,32 @@ double TransMat::Lambda()
   wI = new double[n];
   /* ask for optimal size of work array */
   lwork = -1;
+  /*
 #ifdef HAVE_LAPACK
-  F77_CALL(dgeev)(jobVL, jobVR, &n, xvals, &n, wR, wI,
-		  left, &n, right, &n, &tmp, &lwork, &info);
+  F77_CALL(dgeev)(jobVL, jobVR, &n, xvals, &n1, wR, wI,
+		  left, &n2, right, &n3, &tmp, &lwork, &info);
 #else
-  F77_CALL(rgeev)(jobVL, jobVR, &n, xvals, &n, wR, wI,
-		  left, &n, right, &n, &tmp, &lwork, &info);
+  */
+  F77_CALL(rgeev)(jobVL, jobVR, &n, xvals, &n1, wR, wI,
+		  left, &n2, right, &n3, &tmp, &lwork, &info);
+  /*
 #endif
+  */
   if (info != 0)
     //error("error code %d from Lapack routine dgeev", info);
   lwork = (int) tmp;
   work = new double[lwork];
+  /*
 #ifdef HAVE_LAPACK
-  F77_CALL(dgeev)(jobVL, jobVR, &n, xvals, &n, wR, wI,
-		  left, &n, right, &n, work, &lwork, &info);
+  F77_CALL(dgeev)(jobVL, jobVR, &n, xvals, &n1, wR, wI,
+		  left, &n2, right, &n3, work, &lwork, &info);
 #else
-  F77_CALL(rgeev)(jobVL, jobVR, &n, xvals, &n, wR, wI,
-		  left, &n, right, &n, work, &lwork, &info);
+  */
+  F77_CALL(rgeev)(jobVL, jobVR, &n, xvals, &n1, wR, wI,
+		  left, &n2, right, &n3, work, &lwork, &info);
+  /*
 #endif
+  */
   if (info != 0)
     //error("error code %d from Lapack routine dgeev", info);
   
