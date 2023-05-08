@@ -89,7 +89,7 @@ extern "C" SEXP getListElement(SEXP list, const char *str);
 
 ///simulations
 ///run metasim on the landscape a certain number of times
-extern "C" SEXP iterate_landscape(SEXP numit, SEXP Rland, SEXP cmpress, SEXP bypop);
+extern "C" SEXP iterate_landscape(SEXP numit, SEXP Rland, SEXP cmpress);
 ///perform survival step on the landscape
 extern "C" SEXP survive_landscape(SEXP Rland);
 ///perform reproduce step on the landscape
@@ -124,9 +124,6 @@ extern "C" SEXP relateinternal(SEXP ind, SEXP acnp);
  
 
 
-extern "C" SEXP test(SEXP mat1, SEXP mat2);
-
-
 
 static const R_CallMethodDef CallEntries[] = {
     {"advance_landscape",   (DL_FUNC) &advance_landscape,   1},
@@ -142,6 +139,6 @@ static const R_CallMethodDef CallEntries[] = {
     {"relateinternal",      (DL_FUNC) &relateinternal,      2},
     {"reproduce_landscape", (DL_FUNC) &reproduce_landscape, 1},
     {"survive_landscape",   (DL_FUNC) &survive_landscape,   1},
-    {"test",                (DL_FUNC) &test,                2},
+    //    {"test",                (DL_FUNC) &test,                2},
     {NULL, NULL, 0}
 };

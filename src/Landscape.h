@@ -703,13 +703,6 @@ void HabCarry(int k = -1);
 
   /**
 
-Adjust for the difference between single matrix model lambda and the
-lambda in the simulation.  Adjustment occurs by killing individuals at random every generation.  bypop==1 means use the eigenvalue for each subpop to adjust.  bypop!=1 means treat entire landscape as a single transition matrix.
-
-   */
-void LambdaAdjust(int bypop = 1);
-  /**
-
      set overall landscape size down to "maxlandsz" carrying capacity
 
    */

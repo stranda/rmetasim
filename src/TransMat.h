@@ -142,8 +142,6 @@ void SetRandomFromStateVec();
   int AnyFrom(size_t fs);
 
   void Diag();
-  //calculates the leading eigenvalue of the TransMatrix
-  double Lambda();
 
   ///overloaded operators
   TransMat operator+(TransMat TM);

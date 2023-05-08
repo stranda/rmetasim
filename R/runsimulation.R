@@ -45,7 +45,7 @@ landscape.coerce <- function(rland,noind=F)
 #is assigned to R's random number seed.  The type of RNG is inherited from the
 #calling environment
 #
-landscape.simulate <- function(Rland, numit, seed=-1, compress=FALSE, adj.lambda=0,force=FALSE)
+landscape.simulate <- function(Rland, numit, seed=-1, compress=FALSE,force=FALSE)
 {
     if (force) rl=TRUE else rl=is.landscape(Rland)
         if (rl)
@@ -55,7 +55,7 @@ landscape.simulate <- function(Rland, numit, seed=-1, compress=FALSE, adj.lambda
                 set.seed(seed)
             }
         Rland <- landscape.coerce(Rland)
-        .Call("iterate_landscape",as.integer(numit),Rland,as.integer(compress),as.integer(adj.lambda),PACKAGE = "rmetasim")
+        .Call("iterate_landscape",as.integer(numit),Rland,as.integer(compress),PACKAGE = "rmetasim")
       }
     else
       {

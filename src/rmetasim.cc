@@ -967,11 +967,11 @@ SEXP convert_metasim_to_R(Landscape_statistics &L)
 
 ///Random number generation depends upon seed and RNG generator defined in the
   ///calling R enviroment
-  SEXP iterate_landscape(SEXP numit, SEXP Rland, SEXP cmpress, SEXP bypop)
+  SEXP iterate_landscape(SEXP numit, SEXP Rland, SEXP cmpress)
 {
   Landscape_statistics L;
   int n,i=0;
-  int compress, bp;
+  int compress;
   
   convert_R_to_metasim(Rland,L);
 
@@ -980,7 +980,6 @@ SEXP convert_metasim_to_R(Landscape_statistics &L)
 
   n = INTEGER(coerceVector(numit,INTSXP))[0];
   compress = INTEGER(coerceVector(cmpress,INTSXP))[0];
-  bp= INTEGER(coerceVector(bypop,INTSXP))[0];
 
   for (i=0;i<n;i++)
     {
@@ -997,10 +996,6 @@ SEXP convert_metasim_to_R(Landscape_statistics &L)
 	  }
 	  if (L.PopSize()>0) {L.Survive();
 	    //	    cerr << "L.Survive();"<<endl;
-	  }
-
-	  if (L.PopSize()>0) {L.LambdaAdjust(bp);
-	    //	    cerr << "L.LambdaAdjust(bp);"<<endl;
 	  }
 
   	  if (L.PopSize()>0) {L.LandCarry();
@@ -1204,39 +1199,6 @@ SEXP l2w(SEXP Rland, SEXP numind)
   SEXP num_loci_poss()
   {
      return ScalarInteger(MAXLOCI);
-  }
-
-  SEXP test(SEXP mat1, SEXP mat2)
-  {
-    TransMat t1,t2,t4;
-    int sz1, sz2, j, i;
-    SEXP ret;
-    sz1 = INTEGER(coerceVector(getAttrib(mat1, R_DimSymbol), INTSXP))[0];
-    sz2 = INTEGER(coerceVector(getAttrib(mat2, R_DimSymbol), INTSXP))[0];
-    if (sz1!=sz2)
-      {
-	//error("matrices must be of same order");
-	return ScalarReal(-1);
-      } else {
-      t1.SetSize(sz1);
-      t2.SetSize(t1.Size());
-      t4.SetSize(t1.Size());
-      t4.Diag();
-
-      for (j=0;j<sz1;j++)
-	{
-	  for (i=0;i<sz1;i++)
-	    {
-	      t1.SetElement(j,i,REAL(coerceVector(mat1, REALSXP))[i+j*sz1]);
-	      t2.SetElement(j,i,REAL(coerceVector(mat2, REALSXP))[i+j*sz1]);
-	    }
-	}
-      ret=PROTECT(allocVector(REALSXP,2));
-      REAL(ret)[0]=(t1+t2).Lambda();
-      REAL(ret)[1]=(t1*(t2+t4)).Lambda();
-      UNPROTECT(1);
-      return ret;
-    }
   }
 
   ///helper function for relateinternal
