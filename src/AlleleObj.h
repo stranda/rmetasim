@@ -21,6 +21,7 @@ This is the declaration of the Allele object types.
 #include <RandLib.h>
 #include <iostream>
 #include <R.h>
+#include <random>
 
 using namespace std;
 
@@ -39,6 +40,7 @@ protected:
   int birth;
   int freq;
   double prop;
+
 
 public:
 

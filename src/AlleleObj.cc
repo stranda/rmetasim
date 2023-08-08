@@ -90,6 +90,7 @@ void SeqAllele::RandomSeq(double a, double c, double t, double g)
   size_t sl;
   sl = SeqLen();
   i = 0;
+  ShuffleLib shuffleLib;
 
   if (a+c+t <= 1.0)
     {
@@ -132,7 +133,7 @@ void SeqAllele::RandomSeq(double a, double c, double t, double g)
     {
       // throw an exception 
     }
-  random_shuffle(dnaseq.begin(), dnaseq.end(),randWrapper);
+  shuffleLib.shuffle(dnaseq.begin(), dnaseq.end());
 }
 
 char SeqAllele::GetSite(int sn)

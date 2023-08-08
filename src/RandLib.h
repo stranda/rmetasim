@@ -16,17 +16,22 @@ set_seed() takes a single long and sets the seed.
 #define RANDLIB_H
 
 /*includes
+
 */
 
 #include <metasim.h>
-
+#include <random>
+#include <random>
+#include <vector>
 
 using namespace std;
 
 class RandLib {
+
   std::vector <double> lp;
+  
 public:
-  RandLib () ;
+  RandLib();
   ~RandLib () ;
 
   void init();
@@ -66,17 +71,31 @@ public:
   ///sets the seed
   void SetSeed(long int sd=0);
 
+  
 }; // end RandLib
 
+
+
+class ShuffleLib {
+private:
+    std::mt19937 generator;
+
+public:
+    ShuffleLib(unsigned int seed = std::random_device{}()) : generator(seed) {}
+
+    template <typename Iterator>
+    void shuffle(Iterator first, Iterator last) {
+        std::shuffle(first, last, generator);
+    }
+};
 
 extern RandLib RandLibObj;
 
 /**
 UTILITY INLINE USED IN SEVERAL FUNCTIONS
 
-Implements a random number generator that STL:random_shuffle can use
 */
-inline int randWrapper(const int n) { return RandLibObj.unirange(n); }
+
 
 
 #endif /*RANDLIB*/

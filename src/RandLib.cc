@@ -19,8 +19,6 @@ This file is part of Metasim
 #include <R.h>
 #include <Rmath.h>
 
-/*
- */
 
 RandLib::RandLib () 
 {

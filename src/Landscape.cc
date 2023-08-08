@@ -1627,7 +1627,7 @@ vector <int>  Landscape_statistics::Rmat(int numind)
   vector <PackedIndividual> IVec;
   vector <int> diptbl;
   vector <int> retval;
-
+  ShuffleLib shuffleLib;
 
   //find the number of occupied habitats
   IVec.reserve(numind);
@@ -1667,7 +1667,7 @@ vector <int>  Landscape_statistics::Rmat(int numind)
 		  I[j].NextIndividual();
 		}
 	    }
-	  random_shuffle(IVec.begin(),IVec.end(),randWrapper);
+	  shuffleLib.shuffle(IVec.begin(),IVec.end());
 
 
 	  if ((numind>0)&&(ps>numind))

@@ -12,6 +12,7 @@
 #include <R_ext/RS.h>
 #include <R_ext/Lapack.h>
 #include <R_ext/Error.h>
+
 //}
 
 /**
