@@ -6,6 +6,7 @@ Maintainer: Allan Strand <stranda@cofc.edu>
 Date: 2020-03-04
 Depends: R (>= 3.4.0)
 Imports: pegas,
+     ape,
 	 ade4,
 	 gtools,
 	 adegenet
