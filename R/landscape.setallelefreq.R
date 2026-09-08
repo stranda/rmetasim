@@ -75,11 +75,15 @@ landscape.setallelefreq <- function(rland,af=NULL,states=TRUE)
           if (sum(av) > 1) stop("allele freq vector sums to > 1")
           aindex <- if (states) {
             ai <- landscape.locus.states(rland, as.numeric(l), do.check = F)
-            ai$aindex[ai$state %in% names(av)]
+            matched <- match(names(av), as.character(ai$state))
+            if (anyNA(matched)) {
+              stop("an allele state in af is not present in the landscape")
+            }
+            ai$aindex[matched]
           } else names(av)
           lcols <- which(locposition == l) + democol
           inds[, lcols] <- as.numeric(
-            sample(aindex, n * length(lcols), replace = T, prob = av)
+            aindex[sample.int(length(aindex), n * length(lcols), replace = TRUE, prob = av)]
           )
         }
         rland$individuals[s.inds, ] <- inds
